@@ -2,9 +2,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface Comment {
-  _id: string;
-  name: string;
-}
+    _id: string;     // Ou 'id' se você preferir renomear
+    name: string;
+    email?: string;
+    text: string;
+    movie_id?: string;
+    date?: string;
+  }
 
 const CommentsPage = () => {
   const [comments, setComments] = useState<Comment[]>([]);

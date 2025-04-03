@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware  # Adicionei CORS
 from pymongo import MongoClient
 from bson import ObjectId
 from dotenv import load_dotenv
+from datetime import datetime
+from typing import List, Optional
+from pydantic import BaseModel, Field
 import os
 from typing import List
 
@@ -27,9 +30,17 @@ db = client["sample_mflix"]
 
 # Modelo Pydantic para validação
 class CommentCreate(BaseModel):
+    id: str = Field(alias="_id")  # Mapeia _id para id
     name: str
-    email: str
+    email: Optional[str] = None
     text: str
+    movie_id: Optional[str] = None  # Adicione se necessário
+    date: Optional[datetime] = None  # Adicione se necessário
+
+    class Config:
+        validate_by_name = True  # Permite usar _id ou id
+        json_encoders = {ObjectId: str}  # Converte ObjectId para string
+
 
 class CommentResponse(CommentCreate):
     id: str
