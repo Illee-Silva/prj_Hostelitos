@@ -1,28 +1,45 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
 from flask_cors import CORS
 from pymongo import MongoClient
 from dotenv import load_dotenv
+from bson import json_util
 import os
+import logging
 
-# Configurações iniciais
+# Configurar logging
+logging.basicConfig(level=logging.DEBUG)
+
 load_dotenv()
-
 app = Flask(__name__)
-
-CORS(app)  # Permite requisições do frontend
-
-# Conexão com MongoDB
-client = MongoClient(os.getenv("MONGO_URI"))
-db = "sample_mflix"
-collection = "comments"
+CORS(app)
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
     try:
-        data = list(collection.find({}, {'_id': 0}).limit(10))  # Pega 10 documentos
-        return jsonify({'success': True, 'data': data})
-    except Exception as e:
-        return jsonify({'success': False, 'error': str(e)}), 500
+        app.logger.debug("Iniciando conexão com MongoDB...")
+        
+        # Testar conexão
+        client = MongoClient(os.getenv("MONGO_URI"), serverSelectionTimeoutMS=5000)
+        client.server_info()  # Força uma operação para testar a conexão
+        app.logger.debug("Conexão com MongoDB estabelecida com sucesso!")
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+        # Acessar banco e coleção
+        db = client[os.getenv("DB_NAME")]
+        collection = db[os.getenv("COLLECTION_NAME")]
+        app.logger.debug(f"Acessando coleção: {collection.name}")
+
+        data = list(collection.find({}).limit(100)) #Limita a quantidade de documentos
+
+        # Executar query
+        return Response(
+            json_util.dumps({'success': True, 'data': data}),
+            mimetype='application/json'
+        )
+    
+    except Exception as e:
+        app.logger.error("ERRO CRÍTICO:", exc_info=True)
+        return Response(
+            json_util.dumps({'success': False, 'error': str(e)}),
+            mimetype='application/json',
+            status=500
+        ), 500
