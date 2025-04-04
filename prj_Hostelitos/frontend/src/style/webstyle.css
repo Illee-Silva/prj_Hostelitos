@@ -4,8 +4,8 @@
 /* Definições globais */
 body {
     font-family: 'Nunito', sans-serif;
-    background-color: #252422; 
-    color: #FFFcf2; 
+    background-color: #252422;
+    color: #FFFcf2;
     margin: 0;
     padding: 0;
     display: flex;
@@ -17,7 +17,7 @@ body {
 
 /* Navbar */
 .navbar {
-    background-color: #403D39; 
+    background-color: #403D39;
     width: 100%;
     padding: 15px 0;
     position: fixed;
@@ -37,32 +37,46 @@ body {
     padding: 0 20px;
 }
 
-/*Logo*/
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-right {
+    margin-left: auto;
+}
+
+.navbar-title {
+    color: #DF5323;
+    font-size: 26px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Logo */
 .navbar-icon {
     width: 50px;
     height: 50px;
     object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-icon:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }
 
 .navbar-logo {
-    color: #DF5323; 
     text-decoration: none;
     font-size: 26px;
     font-weight: bold;
+    color: #DF5323;
     transition: 0.3s;
 }
 
 .navbar-logo:hover {
     color: #CCC5B9;
-}
-
-.navbar-logo img {
-    transition: transform 0.3s ease-in-out;
-}
-
-.navbar-logo img:hover {
-    transform: scale(1.1); 
-    cursor: pointer;
 }
 
 .navbar-menu {
@@ -134,8 +148,8 @@ body {
 }
 
 .login-card {
-    background: #FFF; 
-    color: #252422; 
+    background: #FFF;
+    color: #252422;
     padding: 60px;
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
@@ -157,20 +171,18 @@ body {
 .input-field {
     width: 90%;
     padding: 10px;
-    border: 1px solid #CCC5B9; 
+    border: 1px solid #CCC5B9;
     border-radius: 25px;
     display: block;
     margin: 0 auto;
     background: #FFF;
-    color: #252422; 
+    color: #252422;
     font-size: 16px;
     outline: none;
     transition: 0.3s;
 }
 
 .input-field:focus {
-    background: #FFF;
-    color: #252422;
     box-shadow: 0 0 8px rgba(223, 83, 35, 0.6);
 }
 
@@ -211,13 +223,31 @@ body {
 
 /* Responsividade */
 @media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-left,
+    .navbar-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar-right {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+
     .home-title {
         font-size: 30px;
     }
+
     .home-button {
         width: 100%;
         max-width: 250px;
     }
+
     .login-card {
         width: 90%;
         padding: 40px;

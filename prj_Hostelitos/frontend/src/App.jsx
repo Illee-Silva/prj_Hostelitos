@@ -9,14 +9,18 @@ export default function App() {
             {/* Navbar */}
             <nav className="navbar">
                 <div className="navbar-container">
-                <Link to="/" className="navbar-logo">
-                        <img src="./img/logo.png" alt="logo" className="navbar-icon"/>
-                    </Link>
-                    <Link to="/" className="navbar-logo">Hostelitos</Link>
-                    <ul className="navbar-menu">
-                        <li><Link to="/" className="navbar-link">Home</Link></li>
-                        <li><Link to="/login" className="navbar-link">Login</Link></li>
-                    </ul>
+                    <div className="navbar-left">
+                        <Link to="/" className="navbar-logo">
+                            <img src="./img/logo.png" alt="logo" className="navbar-icon" />
+                        </Link>
+                        <ul className="navbar-menu">
+                            <li><Link to="/" className="navbar-link">Home</Link></li>
+                            <li><Link to="/login" className="navbar-link">Login</Link></li>
+                        </ul>
+                    </div>
+                    <div className="navbar-right">
+                        <span className="navbar-title">Hostelitos</span>
+                    </div>
                 </div>
             </nav>
 
