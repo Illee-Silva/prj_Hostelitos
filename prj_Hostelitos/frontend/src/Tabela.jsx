@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Container, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 
-export default function App() {
+export default function Tabela() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
 
