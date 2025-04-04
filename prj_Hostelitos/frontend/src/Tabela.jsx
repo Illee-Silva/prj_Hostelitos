@@ -1,8 +1,7 @@
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
-import Home from './pages/Home'
-import Login from './pages/Login'
+import { useEffect, useState } from 'react'
+import { Container, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import axios from 'axios'
 
-<<<<<<<< HEAD:prj_Hostelitos/frontend/src/Tabela.jsx
 export default function Tabela() {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -54,26 +53,3 @@ export default function Tabela() {
     </Container>
   )
 }
-========
-export default function App() {
-    return (
-        <Router>
-        <nav>
-            <ul style={{ listStyle: 'none', display: 'flex', gap: '20px' }}>
-            <li>
-                <Link to="/">Home</Link>
-            </li>
-            <li>
-                <Link to="/login">Login</Link>
-            </li>
-            </ul>
-        </nav>
-    
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-        </Routes>
-        </Router>
-    )
-    }
->>>>>>>> dev_back_end:prj_Hostelitos/frontend/src/App.jsx
