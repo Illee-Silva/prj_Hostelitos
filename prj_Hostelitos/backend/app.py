@@ -32,14 +32,20 @@ def get_data():
 
         # Executar query
         return Response(
+
             json_util.dumps({'success': True, 'data': data}),
             mimetype='application/json'
+            
         )
     
     except Exception as e:
+
         app.logger.error("ERRO CRÍTICO:", exc_info=True)
+
         return Response(
+
             json_util.dumps({'success': False, 'error': str(e)}),
             mimetype='application/json',
             status=500
+
         ), 500
