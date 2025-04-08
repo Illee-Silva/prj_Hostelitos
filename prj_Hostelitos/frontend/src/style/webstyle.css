@@ -1,0 +1,255 @@
+/* Importando fonte padrão */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&display=swap');
+
+/* Definições globais */
+body {
+    font-family: 'Nunito', sans-serif;
+    background-color: #252422;
+    color: #FFFcf2;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #403D39;
+    width: 100%;
+    padding: 15px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
+    padding: 0 20px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar-right {
+    margin-left: auto;
+}
+
+.navbar-title {
+    color: #DF5323;
+    font-size: 26px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Logo */
+.navbar-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-icon:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.navbar-logo {
+    text-decoration: none;
+    font-size: 26px;
+    font-weight: bold;
+    color: #DF5323;
+    transition: 0.3s;
+}
+
+.navbar-logo:hover {
+    color: #CCC5B9;
+}
+
+.navbar-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar-menu li {
+    display: inline;
+}
+
+.navbar-link {
+    text-decoration: none;
+    color: #FFFcf2;
+    font-weight: 400;
+    transition: 0.3s;
+    padding: 8px 12px;
+}
+
+.navbar-link:hover {
+    color: #DF5323;
+    transform: scale(1.1);
+}
+
+/* Página Home */
+.home-container {
+    text-align: center;
+    padding: 120px 20px 50px;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.home-title {
+    color: #DF5323;
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+.home-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #DF5323, #CCC5B9);
+    color: #252422;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.home-button:hover {
+    background: linear-gradient(135deg, #CCC5B9, #DF5323);
+    transform: scale(1.05);
+}
+
+/* Página de Login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    width: 100%;
+    padding: 80px 20px 20px;
+    box-sizing: border-box;
+}
+
+.login-card {
+    background: #FFF;
+    color: #252422;
+    padding: 60px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    transition: 0.3s;
+}
+
+.login-card:hover {
+    transform: scale(1.02);
+}
+
+.input-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.input-field {
+    width: 90%;
+    padding: 10px;
+    border: 1px solid #CCC5B9;
+    border-radius: 25px;
+    display: block;
+    margin: 0 auto;
+    background: #FFF;
+    color: #252422;
+    font-size: 16px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-field:focus {
+    box-shadow: 0 0 8px rgba(223, 83, 35, 0.6);
+}
+
+.login-button {
+    background: linear-gradient(135deg, #DF5323, #CCC5B9);
+    color: #252422;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    width: 90%;
+    max-width: 300px;
+    display: block;
+    margin: 20px auto 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login-button:hover {
+    transform: scale(1.05);
+}
+
+.back-home {
+    margin-top: 15px;
+    background: transparent;
+    border: none;
+    color: #DF5323;
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: underline;
+    transition: 0.3s;
+}
+
+.back-home:hover {
+    color: #CCC5B9;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .navbar-left,
+    .navbar-menu {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .navbar-right {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+
+    .home-title {
+        font-size: 30px;
+    }
+
+    .home-button {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    .login-card {
+        width: 90%;
+        padding: 40px;
+    }
+}
