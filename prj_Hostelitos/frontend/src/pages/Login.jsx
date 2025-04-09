@@ -7,19 +7,27 @@ export default function Login() {
   return (
     <div className="login-container">
       <div className="login-card">
+
         <h1>Login</h1>
+
         <form>
+
           <div className="input-group">
-            <label htmlFor="username">Usuário:</label>
+            <label htmlFor="username" className='login-label'>Usuário:</label>
             <input type="text" id="username" name="username" className="input-field" required />
           </div>
+
           <div className="input-group">
-            <label htmlFor="password">Senha:</label>
+            <label htmlFor="password" className='login-label'>Senha:</label>
             <input type="password" id="password" name="password" className="input-field" required />
           </div>
-          <button type="submit" className="login-button">Entrar</button>
+
+          <button type="submit" className="login-button">ENTRAR</button>
+
         </form>
+
         <button onClick={() => navigate('/')} className="back-home">Voltar para Home</button>
+
       </div>
     </div>
   );

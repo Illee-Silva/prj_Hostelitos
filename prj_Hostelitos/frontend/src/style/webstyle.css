@@ -60,6 +60,7 @@ body {
     height: 50px;
     object-fit: contain;
     transition: transform 0.3s ease-in-out;
+    padding: 0px 0px;
 }
 
 .navbar-icon:hover {
@@ -68,11 +69,14 @@ body {
 }
 
 .navbar-logo {
+    height: 50px;
+    width: 50px;
     text-decoration: none;
     font-size: 26px;
     font-weight: bold;
     color: #DF5323;
     transition: 0.3s;
+    padding: 0px 0px;
 }
 
 .navbar-logo:hover {
@@ -92,11 +96,13 @@ body {
 }
 
 .navbar-link {
+    font-size: 1.5rem;
     text-decoration: none;
+    font-family: monospace;
     color: #FFFcf2;
     font-weight: 400;
     transition: 0.3s;
-    padding: 8px 12px;
+    padding: 0px 0px;
 }
 
 .navbar-link:hover {
@@ -160,10 +166,12 @@ body {
 }
 
 .login-card:hover {
-    transform: scale(1.02);
+    box-shadow: 0 12px 24px rgba(255, 115, 0, 0.4);
 }
 
 .input-group {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     margin-bottom: 15px;
 }
@@ -171,11 +179,11 @@ body {
 .input-field {
     width: 90%;
     padding: 10px;
-    border: 1px solid #CCC5B9;
+    border: 1px solid #8b8b8b;
     border-radius: 25px;
     display: block;
     margin: 0 auto;
-    background: #FFF;
+    background: #bdbdbd;
     color: #252422;
     font-size: 16px;
     outline: none;
@@ -186,14 +194,22 @@ body {
     box-shadow: 0 0 8px rgba(223, 83, 35, 0.6);
 }
 
-.login-button {
-    background: linear-gradient(135deg, #DF5323, #CCC5B9);
+.login-label {
+    margin-bottom: 5px;
+    font-size: 16px;
     color: #252422;
+    align-self: flex-start;
+}
+
+.login-button {
+    background: linear-gradient(180deg, #161616, #424242);
+    color: #ffffff;
     padding: 12px 20px;
     border: none;
     border-radius: 25px;
     cursor: pointer;
     font-weight: bold;
+    font-family: Impact, sans-serif;
     transition: 0.3s;
     width: 90%;
     max-width: 300px;
@@ -204,6 +220,7 @@ body {
 
 .login-button:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 6px 3px rgba(255, 115, 0, 0.8);
 }
 
 .back-home {

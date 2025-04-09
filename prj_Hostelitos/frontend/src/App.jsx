@@ -6,21 +6,29 @@ import './style/webstyle.css';
 export default function App() {
     return (
         <Router>
+
             {/* Navbar */}
+
             <nav className="navbar">
                 <div className="navbar-container">
+
                     <div className="navbar-left">
+
                         <Link to="/" className="navbar-logo">
                             <img src="./img/logo.png" alt="logo" className="navbar-icon" />
                         </Link>
+
                         <ul className="navbar-menu">
-                            <li><Link to="/" className="navbar-link">Home</Link></li>
-                            <li><Link to="/login" className="navbar-link">Login</Link></li>
+                            <li><Link to="/" className="navbar-link">HOME</Link></li>
+                            <li><Link to="/login" className="navbar-link">LOGIN</Link></li>
                         </ul>
+
                     </div>
+
                     <div className="navbar-right">
                         <span className="navbar-title">Hostelitos</span>
                     </div>
+
                 </div>
             </nav>
 
