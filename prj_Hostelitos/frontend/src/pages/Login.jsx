@@ -25,7 +25,9 @@ export default function Login() {
           <button type="submit" className="login-button">ENTRAR</button>
 
         </form>
-        <button onClick={() => navigate('/')} className="back-home">Register</button>
+
+        <button onClick={() => navigate('/register')} className="back-home">Register</button>
+
       </div>
     </div>
   );

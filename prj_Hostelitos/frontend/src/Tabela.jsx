@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Container, Typography, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import axios from 'axios'
+import './style/tabela.css'
 
 export default function Tabela() {
   const [data, setData] = useState([])
@@ -29,15 +30,19 @@ export default function Tabela() {
       {loading ? (
         <Typography>Carregando...</Typography>
       ) : (
+
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
+
               <TableRow>
                 {data[0] && Object.keys(data[0]).map((key) => (
                   <TableCell key={key}>{key}</TableCell>
                 ))}
               </TableRow>
+
             </TableHead>
+
             <TableBody>
               {data.map((item, index) => (
                 <TableRow key={index}>
@@ -47,6 +52,7 @@ export default function Tabela() {
                 </TableRow>
               ))}
             </TableBody>
+            
           </Table>
         </TableContainer>
       )}

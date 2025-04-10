@@ -35,6 +35,7 @@ export default function App() {
 
             {/* Rotas */}
             <div className="page-content">
+
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
