@@ -12,7 +12,7 @@
 
 
 ## Instruções
-==Siga Todos os Passos Para Evitar Problemas==
+***Siga Todos os Passos Para Evitar Problemas***
 
 - Crie o Arquivo .env dentro da pasta Backend, lembre-se de adicionar o arquivo ao GITIGNORE, caso contrario você irá vazar a Key da API publicamente.
 
