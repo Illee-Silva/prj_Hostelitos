@@ -6,3 +6,9 @@ prj_Hostelitos.tar.gz
 prj_Hostelitos.tar.gz.local
 *.tar.gz
 *.tar.gz.local
+
+
+.venv
+.venv*
+.venv.local
+*.venv
