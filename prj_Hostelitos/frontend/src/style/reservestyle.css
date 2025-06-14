@@ -1,0 +1,341 @@
+/* Reserve Page Styles - Dark Theme with Orange Accents */
+.hostelitos-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 120px);
+  background-color: #1e1e1e;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.hostelitos-box {
+  width: 100%;
+  max-width: 1200px;
+  background: #2d2a26;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  margin: 1.5rem 0;
+  border: 1px solid #3a3632;
+}
+
+#hostelitos-content {
+  padding: 2.5rem;
+}
+
+.section-title {
+  font-size: 1.6rem;
+  color: #DF5323;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Filtros Section */
+.filters-section {
+  padding: 1.5rem;
+  background: #252220;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  border: 1px solid #3a3632;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-option {
+  flex: 1 1 calc(25% - 1rem);
+  min-width: 180px;
+  padding: 1rem;
+  background: #1e1b18;
+  border-radius: 8px;
+  border: 1px solid #3a3632;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.filter-option:hover {
+  border-color: #DF5323;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-option.active {
+  background-color: #DF5323;
+  border-color: #DF5323;
+}
+
+.filter-option.active .filter-name,
+.filter-option.active .filter-description {
+  color: white;
+}
+
+.filter-option-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-name {
+  font-weight: 600;
+  color: #f0f0f0;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter-count {
+  color: #DF5323;
+  font-weight: 700;
+}
+
+.filter-option.active .filter-count {
+  color: white;
+}
+
+.filter-description {
+  color: #a0a0a0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Price Filter */
+.price-filter {
+  margin-top: 1.5rem;
+  padding: 1.2rem;
+  background: #1e1b18;
+  border-radius: 8px;
+  border: 1px solid #3a3632;
+}
+
+.price-range-display {
+  color: #f0f0f0;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.price-slider-container {
+  position: relative;
+  height: 30px;
+  margin-bottom: 0.5rem;
+}
+
+.price-slider {
+  width: 50%;
+  margin: 0.5rem 0;
+  -webkit-appearance: none;
+  height: 10px;
+  background: #3a3632;
+  border-radius: 5px;
+  outline: none;
+  position: relative;
+}
+
+.price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #DF5323;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.price-labels {
+  display: flex;
+  justify-content: space-between;
+  color: #a0a0a0;
+  font-size: 0.8rem;
+}
+
+/* Rooms Section */
+.rooms-section {
+  padding: 1rem 0;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.results-count {
+  color: #a0a0a0;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.room-card {
+  background: #252220;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #3a3632;
+  transition: all 0.3s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  border-color: #DF5323;
+}
+
+.room-image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.room-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.room-card:hover .room-image {
+  transform: scale(1.05);
+}
+
+.room-details {
+  padding: 1.2rem;
+}
+
+.room-type {
+  font-weight: 700;
+  color: #f0f0f0;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.room-description {
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.room-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #3a3632;
+}
+
+.room-price {
+  font-weight: 700;
+  color: #DF5323;
+  font-size: 1.1rem;
+}
+
+.reserve-button {
+  padding: 0.6rem 1.2rem;
+  background-color: #DF5323;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.reserve-button:hover {
+  background-color: #c34a1f;
+  transform: translateY(-2px);
+}
+
+/* No Results State */
+.no-results {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: #252220;
+  border-radius: 10px;
+  border: 1px dashed #3a3632;
+}
+
+.no-results p {
+  color: #a0a0a0;
+  margin-bottom: 1.5rem;
+}
+
+.reset-filters {
+  padding: 0.6rem 1.2rem;
+  background-color: transparent;
+  color: #DF5323;
+  border: 1px solid #DF5323;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.reset-filters:hover {
+  background-color: rgba(223, 83, 35, 0.1);
+}
+
+.reset-filters.secondary {
+  margin-top: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+  .filter-option {
+    flex: 1 1 calc(50% - 1rem);
+  }
+  
+  #hostelitos-content {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .filters-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .rooms-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .hostelitos-page {
+    padding: 1rem;
+  }
+  
+  .filter-option {
+    flex: 1 1 100%;
+  }
+  
+  #hostelitos-content {
+    padding: 1.5rem;
+  }
+  
+  .room-image-container {
+    height: 180px;
+  }
+}

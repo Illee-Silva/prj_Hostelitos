@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Reserve from './pages/Reserve';
 import './style/webstyle.css';
 import * as React from 'react';
 import Button from '@mui/material/Button';
@@ -12,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
+import EventAvailableIcon from '@mui/icons-material/EventAvailable'; // Novo ícone para reservas
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -62,6 +64,10 @@ export default function App() {
                                                     <HowToRegIcon className="menu-icon" />
                                                     <Link to="/register" className="navbar-link">Cadastro</Link>
                                                 </MenuItem>
+                                                <MenuItem onClick={popupState.close} className="menu-item">
+                                                    <EventAvailableIcon className="menu-icon" />
+                                                    <Link to="/reserve" className="navbar-link">Reservar</Link>
+                                                </MenuItem>
                                             </Menu>
                                         </React.Fragment>
                                     )}
@@ -71,16 +77,17 @@ export default function App() {
                     </div>
                 </nav>
 
-                {/* Conteúdo principal */}
+                {/* Main Content */}
                 <main className="content-wrap">
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
+                        <Route path="/reserve" element={<Reserve />} />
                     </Routes>
                 </main>
 
-                {/* Footer fixo */}
+                {/* Footer */}
                 <footer className="site-footer">
                     <div className="footer-content">
                         <div className="footer-section">
@@ -110,6 +117,7 @@ export default function App() {
                             <Link to="/">Home</Link>
                             <Link to="/login">Login</Link>
                             <Link to="/register">Cadastro</Link>
+                            <Link to="/reserve">Reservar</Link>
                         </div>
                     </div>
 
