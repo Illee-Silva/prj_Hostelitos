@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Reserve from './pages/Reserve';
+import ReservationDetails from './pages/ReservationDetails'; // Import adicionado
 import './style/webstyle.css';
 import * as React from 'react';
 import Button from '@mui/material/Button';
@@ -13,7 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import HomeIcon from '@mui/icons-material/Home';
 import HowToRegIcon from '@mui/icons-material/HowToReg';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable'; // Novo ícone para reservas
+import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
@@ -84,6 +85,7 @@ export default function App() {
                         <Route path="/login" element={<Login />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/reserve" element={<Reserve />} />
+                        <Route path="/reservation" element={<ReservationDetails />} />
                     </Routes>
                 </main>
 
@@ -106,9 +108,9 @@ export default function App() {
                         <div className="footer-section">
                             <h3>Redes Sociais</h3>
                             <div className="social-icons">
-                                <FacebookIcon />
-                                <TwitterIcon />
-                                <InstagramIcon />
+                                <a href="#"><FacebookIcon /></a>
+                                <a href="#"><TwitterIcon /></a>
+                                <a href="#"><InstagramIcon /></a>
                             </div>
                         </div>
 

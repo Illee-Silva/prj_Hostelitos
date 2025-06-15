@@ -1,0 +1,379 @@
+/* General Styles */
+.reservation-details {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #1e1e1e;
+  min-height: calc(100vh - 120px);
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: #f0f0f0;
+}
+
+/* Header Styles */
+.reservation-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.hostel-name {
+  font-size: 2.5rem;
+  color: #DF5323;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.reservation-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f0f0f0;
+}
+
+/* Main Container */
+.reservation-details-page .room-detail-card {
+  display: flex;
+  gap: 3rem;
+  background: #252220;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  padding: 2.5rem;
+  margin-bottom: 2.5rem;
+  border: 1px solid #3a3632;
+  align-items: flex-start;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Image Container */
+.reservation-details-page .room-image-container {
+  flex: 1;
+  min-width: 450px;
+  max-width: 550px;
+  height: 500px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #3a3632;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.room-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.room-image:hover {
+  transform: scale(1.03);
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2a2a2a;
+  color: #888;
+  font-size: 1.2rem;
+}
+
+/* Room Info Section */
+.room-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.room-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.room-type {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #f0f0f0;
+  margin: 0;
+}
+
+.price-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.price-per-night {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #DF5323;
+}
+
+.price-label {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.room-description {
+  line-height: 1.6;
+  color: #d0d0d0;
+  margin: 0;
+}
+
+/* Features Section */
+.room-features {
+  margin-top: 1rem;
+}
+
+.features-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
+  color: #f0f0f0;
+}
+
+.features-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.8rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #d0d0d0;
+}
+
+.feature-icon {
+  color: #DF5323;
+  font-weight: bold;
+}
+
+/* Reservation Form Styles */
+.reservation-section {
+  margin-top: 2rem;
+  background: #2a2624;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid #3a3632;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 1.5rem;
+  color: #f0f0f0;
+  font-weight: 600;
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-label {
+  font-size: 0.95rem;
+  color: #d0d0d0;
+  font-weight: 500;
+}
+
+.form-input, .form-select {
+  padding: 0.8rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #3a3632;
+  background-color: #1e1e1e;
+  color: #f0f0f0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: #DF5323;
+  box-shadow: 0 0 0 2px rgba(223, 83, 35, 0.2);
+}
+
+.form-input::placeholder {
+  color: #777;
+}
+
+/* Price Summary */
+.total-price-summary {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #3a3632;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.summary-row:last-child {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #DF5323;
+  margin-top: 0.5rem;
+}
+
+/* Confirm Button */
+.confirm-button {
+  background-color: #DF5323;
+  color: white;
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.confirm-button:hover {
+  background-color: #c74a1f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(223, 83, 35, 0.3);
+}
+
+.confirm-button:active {
+  transform: translateY(0);
+}
+
+.confirm-button.submitting {
+  background-color: #a53d18;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: white;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Back Button - Enhanced Style */
+.back-button {
+  background-color: transparent;
+  color: #DF5323;
+  border: 2px solid #DF5323;
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 1rem;
+}
+
+.back-button:hover {
+  background-color: rgba(223, 83, 35, 0.1);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.back-button:active {
+  transform: translateY(0);
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .reservation-details-page .room-detail-card {
+    gap: 2rem;
+    padding: 2rem;
+  }
+  
+  .reservation-details-page .room-image-container {
+    min-width: 350px;
+    height: 400px;
+  }
+  
+  .features-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .reservation-details-page .room-detail-card {
+    flex-direction: column;
+    padding: 1.5rem;
+  }
+  
+  .reservation-details-page .room-image-container {
+    width: 100%;
+    height: 350px;
+    min-width: auto;
+    max-width: 100%;
+  }
+  
+  .form-row {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  
+  .back-button {
+    width: 100%;
+    justify-content: center;
+    padding: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reservation-details {
+    padding: 1.5rem;
+  }
+  
+  .hostel-name {
+    font-size: 2rem;
+  }
+  
+  .reservation-title {
+    font-size: 1.5rem;
+  }
+  
+  .reservation-details-page .room-image-container {
+    height: 250px;
+  }
+  
+  .room-type, .price-per-night {
+    font-size: 1.5rem;
+  }
+}

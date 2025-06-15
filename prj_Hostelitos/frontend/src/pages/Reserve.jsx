@@ -10,61 +10,61 @@ export default function Reserve() {
   const rooms = [
     { 
       type: 'Suíte', 
-      description: 'Quarto com banheiro e cama de casal', 
+      description: 'Suíte Luxo com 35m², cama king-size, banheiro privativo com hidromassagem, TV 50" Smart, ar-condicionado, minibar, varanda com vista para o mar, Wi-Fi rápido e serviço de quarto 24h. Inclui café da manhã buffet e acesso à piscina.', 
       price: 300,
       image: '/img/suite01.jpg' 
     },
     { 
       type: 'Simples', 
-      description: 'Quarto com uma cama de solteiro', 
+      description: 'Quarto aconchegante de 18m² com cama de solteiro premium, banheiro compartilhado (limpo 3x ao dia), TV 32", ventilador, escrivaninha, armário espaçoso e Wi-Fi. Vista para o jardim interno. Ideal para viajantes individuais que buscam conforto e economia.', 
       price: 1000,
       image: '/img/simples01.jpg'
     },
     { 
       type: 'Duplo', 
-      description: 'Quarto com duas camas incluídas', 
+      description: 'Amplo quarto de 28m² com duas camas de solteiro premium, banheiro privativo, TV 40", ar-condicionado, sofá-cama adicional, mesa de trabalho e Wi-Fi rápido. Vista parcial para a cidade. Perfeito para amigos ou colegas de viagem.', 
       price: 1100,
       image: '/img/duplo01.jpg'
     },
     { 
       type: 'Simples', 
-      description: 'Quarto com uma cama de solteiro', 
+      description: 'Quarto compacto de 15m² com cama single ergonômica, banheiro compartilhado (limpeza frequente), TV 28", mesa de cabeceira, armário e Wi-Fi. Localizado em andar alto com vista para os telhados da cidade. Ótimo custo-benefício.', 
       price: 1400,
       image: '/img/simples02.jpg'
     },
     { 
       type: 'Duplo', 
-      description: 'Quarto com duas camas incluídas', 
+      description: 'Quarto familiar de 32m² com duas camas de solteiro convertíveis em cama de casal, banheiro privativo com amenities, TV 43" Smart, ar-condicionado, frigobar e espaço de trabalho. Inclui 1 cama extra sob consulta. Vista para o pátio interno.', 
       price: 880,
       image: '/img/duplo02.jpg'
     },
     { 
       type: 'Suíte', 
-      description: 'Quarto com banheiro e cama de casal', 
+      description: 'Suíte Executiva de 40m² com cama queen-size, banheiro de mármore com ducha térmica, sala de estar integrada, TV 55" 4K, cofre digital, cafeteira Nespresso, serviço diário de cortesia e vista panorâmica. Acesso exclusivo ao lounge.', 
       price: 1388,
       image: '/img/suite02.jpg'
     },
     { 
       type: 'Simples', 
-      description: 'Quarto com uma cama de solteiro', 
+      description: 'Quarto standard de 16m² com cama confortável, banheiro compartilhado (higienizado a cada uso), TV a cabo, mesa de trabalho, Wi-Fi de alta velocidade e blackout nas cortinas. Localização privilegiada próximo aos elevadores.', 
       price: 888,
       image: '/img/simples03.jpg'
     },
     { 
       type: 'Suíte', 
-      description: 'Quarto com banheiro e cama de casal', 
+      description: 'Suíte Premium de 45m² com cama king-size ortopédica, banheiro spa com sauna privativa, varanda mobiliada, TV 60" OLED, sistema de som ambiente, cafeteira e frutas de cortesia. Vista deslumbrante para o skyline noturno.', 
       price: 1398,
       image: '/img/suite03.jpg'
     },
     { 
       type: 'Simples', 
-      description: 'Quarto com uma cama de solteiro', 
+      description: 'Quarto econômico de 14m² com cama single, banheiro compartilhado (2 por andar), TV 24", mesa lateral, prateleiras e Wi-Fi. Janela com ventilação natural. Opção mais acessível para estadias curtas.', 
       price: 1280,
       image: '/img/simples04.jpg'
     },
     { 
       type: 'Duplo', 
-      description: 'Quarto com duas camas incluídas', 
+      description: 'Quarto twin de 30m² com duas camas de solteiro premium, banheiro privativo amplo, TV Smart 42", mesa de reunião para 4 pessoas, armários individuais e iluminação regulável. Excelente para viagens a trabalho.', 
       price: 899,
       image: '/img/duplo03.jpg'
     },
@@ -140,7 +140,7 @@ export default function Reserve() {
                   <p className="filter-name">
                     Suíte <span className="filter-count">({countRooms("Suíte")})</span>
                   </p>
-                  <p className="filter-description">Quarto com banheiro e cama de casal</p>
+                  <p className="filter-description">Conforto premium com banheiro privativo</p>
                 </div>
               </div>
               
@@ -152,7 +152,7 @@ export default function Reserve() {
                   <p className="filter-name">
                     Duplo <span className="filter-count">({countRooms("Duplo")})</span>
                   </p>
-                  <p className="filter-description">Quarto com duas camas incluídas</p>
+                  <p className="filter-description">Espaço ideal para duas pessoas</p>
                 </div>
               </div>
               
@@ -164,7 +164,7 @@ export default function Reserve() {
                   <p className="filter-name">
                     Simples <span className="filter-count">({countRooms("Simples")})</span>
                   </p>
-                  <p className="filter-description">Quarto com uma cama de solteiro</p>
+                  <p className="filter-description">Econômico para viajantes individuais</p>
                 </div>
               </div>
             </div>
