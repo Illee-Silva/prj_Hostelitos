@@ -162,6 +162,73 @@
   font-size: 0.8rem;
 }
 
+/* Slider customizado para todos os inputs[type=range] */
+input[type=range], .price-slider {
+  width: 100%;
+  margin: 0.5rem 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  background: #3a3632;
+  border-radius: 5px;
+  outline: none;
+  transition: background 0.3s;
+}
+input[type=range]::-webkit-slider-thumb, .price-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  background: #DF5323;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s;
+}
+input[type=range]:focus, .price-slider:focus {
+  background: #50443a;
+}
+input[type=range]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  background: #DF5323;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+input[type=range]::-ms-thumb {
+  width: 18px;
+  height: 18px;
+  background: #DF5323;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+input[type=range]:focus::-webkit-slider-thumb {
+  background: #c34a1f;
+}
+input[type=range]:focus::-moz-range-thumb {
+  background: #c34a1f;
+}
+input[type=range]:focus::-ms-thumb {
+  background: #c34a1f;
+}
+input[type=range]::-ms-fill-lower {
+  background: #3a3632;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3a3632;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #50443a;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #50443a;
+}
+
 /* Rooms Section */
 .rooms-section {
   padding: 1rem 0;
@@ -264,6 +331,13 @@
 .reserve-button:hover {
   background-color: #c34a1f;
   transform: translateY(-2px);
+}
+
+.reserve-button.reserved {
+  background-color: #888 !important;
+  color: #fff;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 /* No Results State */

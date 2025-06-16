@@ -4,6 +4,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Reserve from './pages/Reserve';
 import ReservationDetails from './pages/ReservationDetails'; // Import adicionado
+import RoomRegister from './pages/RoomRegister';
+import ReservationsAdmin from './pages/ReservationsAdmin';
+import Reservations from './pages/Reservations';
 import './style/webstyle.css';
 import * as React from 'react';
 import Button from '@mui/material/Button';
@@ -21,59 +24,127 @@ import InstagramIcon from '@mui/icons-material/Instagram';
 import EmailIcon from '@mui/icons-material/Email';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import { useLoggedUser } from "./hooks/useLoggedUser";
+import Box from '@mui/material/Box';
 
 export default function App() {
+    const user = useLoggedUser();
+    const handleLogout = () => {
+        localStorage.removeItem("userEmail");
+        window.location.reload();
+    };
     return (
         <div className="page-container">
             <Router>
                 {/* Navbar */}
                 <nav className="navbar">
                     <div className="navbar-container">
-                        <div className="navbar-brand">
+                        {/* Menu à esquerda */}
+                        <div className="navbar-left">
+                            <div className="navbar-menu-container">
+                                <div className="desktop-menu" style={{ display: 'flex', gap: '1rem' }}>
+                                    <PopupState variant="popover" popupId="demo-popup-menu">
+                                        {(popupState) => (
+                                            <React.Fragment>
+                                                <Button
+                                                    className="menu-button"
+                                                    variant="contained"
+                                                    {...bindTrigger(popupState)}
+                                                    startIcon={<MenuIcon />}
+                                                >
+                                                    Menu
+                                                </Button>
+                                                <Menu {...bindMenu(popupState)}>
+                                                    <MenuItem onClick={popupState.close} className="menu-item">
+                                                        <HomeIcon className="menu-icon" />
+                                                        <Link to="/" className="navbar-link">Home</Link>
+                                                    </MenuItem>
+                                                    <MenuItem onClick={popupState.close} className="menu-item">
+                                                        <AccountCircleIcon className="menu-icon" />
+                                                        <Link to="/login" className="navbar-link">Login</Link>
+                                                    </MenuItem>
+                                                    <MenuItem onClick={popupState.close} className="menu-item">
+                                                        <HowToRegIcon className="menu-icon" />
+                                                        <Link to="/register" className="navbar-link">Cadastro</Link>
+                                                    </MenuItem>
+                                                    <MenuItem onClick={popupState.close} className="menu-item">
+                                                        <EventAvailableIcon className="menu-icon" />
+                                                        <Link to="/reserve" className="navbar-link">Reservar</Link>
+                                                    </MenuItem>
+                                                </Menu>
+                                            </React.Fragment>
+                                        )}
+                                    </PopupState>
+                                    {/* Menu Admin separado */}
+                                    {user && user.admin && (
+                                        <PopupState variant="popover" popupId="admin-menu">
+                                            {(popupState) => (
+                                                <React.Fragment>
+                                                    <Button
+                                                        className="menu-button"
+                                                        variant="contained"
+                                                        color="secondary"
+                                                        {...bindTrigger(popupState)}
+                                                        startIcon={<MenuIcon />}
+                                                    >
+                                                        Admin
+                                                    </Button>
+                                                    <Menu {...bindMenu(popupState)}>
+                                                        <MenuItem onClick={popupState.close} className="menu-item">
+                                                            <EventAvailableIcon className="menu-icon" />
+                                                            <Link to="/room-register" className="navbar-link">Cadastrar Quarto</Link>
+                                                        </MenuItem>
+                                                        <MenuItem onClick={popupState.close} className="menu-item">
+                                                            <EventAvailableIcon className="menu-icon" />
+                                                            <Link to="/reservations-admin" className="navbar-link">Reservas</Link>
+                                                        </MenuItem>
+                                                    </Menu>
+                                                </React.Fragment>
+                                            )}
+                                        </PopupState>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                        {/* Logo e nome centralizados */}
+                        <div className="navbar-center">
                             <Link to="/" className="navbar-logo">
                                 <img src="./img/logo.png" alt="logo" className="navbar-icon" />
                             </Link>
                             <span className="navbar-title">Hostelitos</span>
                         </div>
-                        
-                        <div className="navbar-menu-container">
-                            <div className="desktop-menu">
-                                <PopupState variant="popover" popupId="demo-popup-menu">
+                        {/* Nome do usuário ou botão Login à direita */}
+                        <div className="navbar-right">
+                            {user ? (
+                                <PopupState variant="popover" popupId="user-menu">
                                     {(popupState) => (
                                         <React.Fragment>
-                                            <Button 
-                                                className="menu-button"
+                                            <Button
                                                 variant="contained"
+                                                color="primary"
                                                 {...bindTrigger(popupState)}
-                                                startIcon={<MenuIcon />}
-                                                aria-label="Menu principal"
-                                                aria-controls="main-menu"
-                                                aria-haspopup="true"
+                                                startIcon={<AccountCircleIcon />}
                                             >
-                                                Menu
+                                                {user.name} {user.admin && <span role="img" aria-label="admin">(💻)</span>}
                                             </Button>
                                             <Menu {...bindMenu(popupState)}>
-                                                <MenuItem onClick={popupState.close} className="menu-item">
-                                                    <HomeIcon className="menu-icon" />
-                                                    <Link to="/" className="navbar-link">Home</Link>
-                                                </MenuItem>
-                                                <MenuItem onClick={popupState.close} className="menu-item">
-                                                    <AccountCircleIcon className="menu-icon" />
-                                                    <Link to="/login" className="navbar-link">Login</Link>
-                                                </MenuItem>
-                                                <MenuItem onClick={popupState.close} className="menu-item">
-                                                    <HowToRegIcon className="menu-icon" />
-                                                    <Link to="/register" className="navbar-link">Cadastro</Link>
-                                                </MenuItem>
-                                                <MenuItem onClick={popupState.close} className="menu-item">
-                                                    <EventAvailableIcon className="menu-icon" />
-                                                    <Link to="/reserve" className="navbar-link">Reservar</Link>
+                                                <MenuItem onClick={() => { popupState.close(); handleLogout(); }}>
+                                                    Sair
                                                 </MenuItem>
                                             </Menu>
                                         </React.Fragment>
                                     )}
                                 </PopupState>
-                            </div>
+                            ) : (
+                                <Button
+                                    className="menu-button"
+                                    variant="contained"
+                                    onClick={() => window.location.href = '/login'}
+                                    startIcon={<AccountCircleIcon />}
+                                >
+                                    Login
+                                </Button>
+                            )}
                         </div>
                     </div>
                 </nav>
@@ -86,6 +157,9 @@ export default function App() {
                         <Route path="/register" element={<Register />} />
                         <Route path="/reserve" element={<Reserve />} />
                         <Route path="/reservation" element={<ReservationDetails />} />
+                        <Route path="/room-register" element={<RoomRegister />} />
+                        <Route path="/reservations-admin" element={<ReservationsAdmin />} />
+                        <Route path="/reservations" element={<Reservations />} />
                     </Routes>
                 </main>
 

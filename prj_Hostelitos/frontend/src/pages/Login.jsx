@@ -1,8 +1,26 @@
 import "../style/webstyle.css";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { login } from "../services/authService";
 
 export default function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    try {
+      await login(email, password);
+      // Força atualização do estado global do usuário
+      window.dispatchEvent(new Event("storage"));
+      navigate("/");
+    } catch (err) {
+      setError(err.message || "Erro ao fazer login");
+    }
+  };
 
   return (
     <div className="login-page">
@@ -10,7 +28,7 @@ export default function Login() {
         <div id="login-form">
           <p className="form-title">Login</p>
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="input-group">
               <label htmlFor="email" className="login-label">
                 E-mail:
@@ -21,6 +39,8 @@ export default function Login() {
                 name="email"
                 className="input-field"
                 required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -34,12 +54,15 @@ export default function Login() {
                 name="password"
                 className="input-field"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
             <button type="submit" className="login-button login-form-button">
               Entrar
             </button>
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </form>
 
           <div className="login-links">

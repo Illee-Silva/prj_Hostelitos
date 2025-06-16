@@ -1,108 +1,107 @@
 import "../style/reservestyle.css";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useLoggedUser } from "../hooks/useLoggedUser";
+
+function normalize(str) {
+  return str ? str.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase() : '';
+}
 
 export default function Reserve() {
   const navigate = useNavigate();
+  const user = useLoggedUser();
   const [activeFilter, setActiveFilter] = useState("all");
-  const [priceRange, setPriceRange] = useState([300, 1500]);
-  
-  const rooms = [
-    { 
-      type: 'Suíte', 
-      description: 'Suíte Luxo com 35m², cama king-size, banheiro privativo com hidromassagem, TV 50" Smart, ar-condicionado, minibar, varanda com vista para o mar, Wi-Fi rápido e serviço de quarto 24h. Inclui café da manhã buffet e acesso à piscina.', 
-      price: 300,
-      image: '/img/suite01.jpg' 
-    },
-    { 
-      type: 'Simples', 
-      description: 'Quarto aconchegante de 18m² com cama de solteiro premium, banheiro compartilhado (limpo 3x ao dia), TV 32", ventilador, escrivaninha, armário espaçoso e Wi-Fi. Vista para o jardim interno. Ideal para viajantes individuais que buscam conforto e economia.', 
-      price: 1000,
-      image: '/img/simples01.jpg'
-    },
-    { 
-      type: 'Duplo', 
-      description: 'Amplo quarto de 28m² com duas camas de solteiro premium, banheiro privativo, TV 40", ar-condicionado, sofá-cama adicional, mesa de trabalho e Wi-Fi rápido. Vista parcial para a cidade. Perfeito para amigos ou colegas de viagem.', 
-      price: 1100,
-      image: '/img/duplo01.jpg'
-    },
-    { 
-      type: 'Simples', 
-      description: 'Quarto compacto de 15m² com cama single ergonômica, banheiro compartilhado (limpeza frequente), TV 28", mesa de cabeceira, armário e Wi-Fi. Localizado em andar alto com vista para os telhados da cidade. Ótimo custo-benefício.', 
-      price: 1400,
-      image: '/img/simples02.jpg'
-    },
-    { 
-      type: 'Duplo', 
-      description: 'Quarto familiar de 32m² com duas camas de solteiro convertíveis em cama de casal, banheiro privativo com amenities, TV 43" Smart, ar-condicionado, frigobar e espaço de trabalho. Inclui 1 cama extra sob consulta. Vista para o pátio interno.', 
-      price: 880,
-      image: '/img/duplo02.jpg'
-    },
-    { 
-      type: 'Suíte', 
-      description: 'Suíte Executiva de 40m² com cama queen-size, banheiro de mármore com ducha térmica, sala de estar integrada, TV 55" 4K, cofre digital, cafeteira Nespresso, serviço diário de cortesia e vista panorâmica. Acesso exclusivo ao lounge.', 
-      price: 1388,
-      image: '/img/suite02.jpg'
-    },
-    { 
-      type: 'Simples', 
-      description: 'Quarto standard de 16m² com cama confortável, banheiro compartilhado (higienizado a cada uso), TV a cabo, mesa de trabalho, Wi-Fi de alta velocidade e blackout nas cortinas. Localização privilegiada próximo aos elevadores.', 
-      price: 888,
-      image: '/img/simples03.jpg'
-    },
-    { 
-      type: 'Suíte', 
-      description: 'Suíte Premium de 45m² com cama king-size ortopédica, banheiro spa com sauna privativa, varanda mobiliada, TV 60" OLED, sistema de som ambiente, cafeteira e frutas de cortesia. Vista deslumbrante para o skyline noturno.', 
-      price: 1398,
-      image: '/img/suite03.jpg'
-    },
-    { 
-      type: 'Simples', 
-      description: 'Quarto econômico de 14m² com cama single, banheiro compartilhado (2 por andar), TV 24", mesa lateral, prateleiras e Wi-Fi. Janela com ventilação natural. Opção mais acessível para estadias curtas.', 
-      price: 1280,
-      image: '/img/simples04.jpg'
-    },
-    { 
-      type: 'Duplo', 
-      description: 'Quarto twin de 30m² com duas camas de solteiro premium, banheiro privativo amplo, TV Smart 42", mesa de reunião para 4 pessoas, armários individuais e iluminação regulável. Excelente para viagens a trabalho.', 
-      price: 899,
-      image: '/img/duplo03.jpg'
-    },
-  ];
+  const [rooms, setRooms] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  // Preço mínimo customizável
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
+  const [inputMin, setInputMin] = useState(0);
+  const [sliderPrice, setSliderPrice] = useState(0);
 
-  // Filtrar quartos com base nos filtros ativos
+  useEffect(() => {
+    fetch("http://localhost:5000/api/rooms")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setRooms(data.rooms);
+          if (data.rooms.length > 0) {
+            const prices = data.rooms.map(r => Number(r.price));
+            const min = Math.min(...prices);
+            const max = Math.max(...prices);
+            setMinPrice(min);
+            setMaxPrice(max);
+            setInputMin(min);
+            setSliderPrice(max); // Começa mostrando todos
+          }
+        } else setError(data.error || "Erro ao buscar quartos");
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
+  // Filtragem dos quartos
   const filteredRooms = rooms.filter(room => {
-    const matchesType = activeFilter === "all" || room.type === activeFilter;
-    const matchesPrice = room.price >= priceRange[0] && room.price <= priceRange[1];
-    return matchesType && matchesPrice;
+    if (activeFilter !== "all" && normalize(room.type) !== normalize(activeFilter)) return false;
+    if (Number(room.price) < inputMin || Number(room.price) > sliderPrice) return false;
+    return true;
   });
 
   // Contar quartos por tipo
-  const countRooms = (type) => {
-    return type === "all" 
-      ? rooms.length 
-      : rooms.filter(room => room.type === type).length;
-  };
+  function countRooms(type) {
+    if (type === "all") return rooms.length;
+    return rooms.filter(room => normalize(room.type) === normalize(type)).length;
+  }
 
-  const handlePriceChange = (e, index) => {
-    const newValue = parseInt(e.target.value);
-    const newPriceRange = [...priceRange];
-    newPriceRange[index] = newValue;
-    
-    // Garantir que o mínimo não seja maior que o máximo e vice-versa
-    if (index === 0 && newValue > priceRange[1]) {
-      newPriceRange[1] = newValue;
-    } else if (index === 1 && newValue < priceRange[0]) {
-      newPriceRange[0] = newValue;
-    }
-    
-    setPriceRange(newPriceRange);
-  };
+  function handleSliderChange(e) {
+    setSliderPrice(Number(e.target.value));
+  }
 
-  const resetFilters = () => {
+  function handleMinChange(e) {
+    setInputMin(e.target.value);
+  }
+
+  function handleMinBlur() {
+    let value = Number(inputMin);
+    if (isNaN(value) || value < minPrice) value = minPrice;
+    if (value > sliderPrice) value = sliderPrice;
+    setInputMin(value);
+  }
+
+  function resetFilters() {
     setActiveFilter("all");
-    setPriceRange([300, 1500]);
-  };
+    setInputMin(minPrice);
+    setSliderPrice(maxPrice);
+  }
+
+  // Reserva de quarto
+  async function handleReserve(roomId) {
+    if (!user) return;
+    try {
+      const res = await fetch("http://localhost:5000/api/reserve", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          room_id: roomId,
+          user_name: user.name,
+          user_email: user.email
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        // Atualiza o estado local para refletir a reserva
+        setRooms(rooms => rooms.map(r => r._id === roomId ? { ...r, reserved: true, reserved_by: { name: user.name, email: user.email } } : r));
+      } else {
+        alert(data.error || "Erro ao reservar quarto");
+      }
+    } catch (err) {
+      alert("Erro ao reservar quarto");
+    }
+  }
 
   return (
     <div className="hostelitos-page">
@@ -118,7 +117,6 @@ export default function Reserve() {
                 Limpar Filtros
               </button>
             </div>
-            
             <div className="filter-options">
               <div 
                 className={`filter-option ${activeFilter === "all" ? "active" : ""}`}
@@ -131,7 +129,6 @@ export default function Reserve() {
                   <p className="filter-description">Todos os tipos de quartos</p>
                 </div>
               </div>
-              
               <div 
                 className={`filter-option ${activeFilter === "Suíte" ? "active" : ""}`}
                 onClick={() => setActiveFilter("Suíte")}
@@ -143,7 +140,6 @@ export default function Reserve() {
                   <p className="filter-description">Conforto premium com banheiro privativo</p>
                 </div>
               </div>
-              
               <div 
                 className={`filter-option ${activeFilter === "Duplo" ? "active" : ""}`}
                 onClick={() => setActiveFilter("Duplo")}
@@ -155,7 +151,6 @@ export default function Reserve() {
                   <p className="filter-description">Espaço ideal para duas pessoas</p>
                 </div>
               </div>
-              
               <div 
                 className={`filter-option ${activeFilter === "Simples" ? "active" : ""}`}
                 onClick={() => setActiveFilter("Simples")}
@@ -168,32 +163,37 @@ export default function Reserve() {
                 </div>
               </div>
             </div>
-
             <div className="price-filter">
+              <div style={{display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem'}}>
+                <label htmlFor="min-price" style={{color: '#f0f0f0'}}>Preço mínimo:</label>
+                <input
+                  id="min-price"
+                  type="number"
+                  min={minPrice}
+                  max={sliderPrice}
+                  value={inputMin}
+                  onChange={handleMinChange}
+                  onBlur={handleMinBlur}
+                  style={{width: '90px', padding: '0.3rem', borderRadius: '4px', border: '1px solid #ccc'}}
+                />
+              </div>
               <p className="price-range-display">
-                Faixa de Preço: ${priceRange[0]} - ${priceRange[1]}
+                Preço máximo: ${sliderPrice}
               </p>
               <div className="price-slider-container">
                 <input
                   type="range"
                   className="price-slider"
-                  min="300"
-                  max="1500"
-                  value={priceRange[0]}
-                  onChange={(e) => handlePriceChange(e, 0)}
-                />
-                <input
-                  type="range"
-                  className="price-slider"
-                  min="300"
-                  max="1500"
-                  value={priceRange[1]}
-                  onChange={(e) => handlePriceChange(e, 1)}
+                  min={minPrice}
+                  max={maxPrice}
+                  value={sliderPrice}
+                  onChange={handleSliderChange}
+                  step="1"
                 />
               </div>
               <div className="price-labels">
-                <span>$300</span>
-                <span>$1500</span>
+                <span>${minPrice}</span>
+                <span>${maxPrice}</span>
               </div>
             </div>
           </div>
@@ -221,25 +221,48 @@ export default function Reserve() {
                 {filteredRooms.map((room, index) => (
                   <div key={index} className="room-card">
                     <div className="room-image-container">
-                      <img 
-                        src={room.image} 
-                        alt={`Quarto ${room.type}`} 
-                        className="room-image"
-                        onError={(e) => {
-                          e.target.src = '/img/rooms/default.jpg';
-                        }}
-                      />
+                      {room.image && room.image.startsWith('data:') ? (
+                        <img 
+                          src={room.image}
+                          alt={`Quarto ${room.type}`}
+                          className="room-image"
+                          onError={(e) => {
+                            e.target.src = '/img/rooms/default.jpg';
+                          }}
+                        />
+                      ) : room.image ? (
+                        <img 
+                          src={`data:image/jpeg;base64,${room.image}`}
+                          alt={`Quarto ${room.type}`}
+                          className="room-image"
+                          onError={(e) => {
+                            e.target.src = '/img/rooms/default.jpg';
+                          }}
+                        />
+                      ) : (
+                        <img 
+                          src='/img/rooms/default.jpg'
+                          alt={`Quarto ${room.type}`}
+                          className="room-image"
+                        />
+                      )}
                     </div>
                     <div className="room-details">
+                      <div className="room-capacity" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                        <span role="img" aria-label="hóspedes" style={{ fontSize: '1.2rem' }}>👤</span>
+                        <span style={{ fontWeight: 500, color: '#444' }}>{room.max_guests || 1} {room.max_guests === 1 ? 'hóspede' : 'hóspedes'}</span>
+                      </div>
                       <p className="room-type">{room.type}</p>
                       <p className="room-description">{room.description}</p>
                       <div className="room-footer">
-                        <p className="room-price">${room.price.toLocaleString()}</p>
+                        <p className="room-price">${Number(room.price).toLocaleString()}</p>
                         <button 
-                          className="reserve-button"
+                          className={`reserve-button${room.reserved ? ' reserved' : ''}`}
                           onClick={() => navigate("/reservation", { state: { room } })}
+                          disabled={room.reserved || !user}
+                          style={room.reserved ? { backgroundColor: '#888', cursor: 'not-allowed' } : {}}
                         >
-                          Reservar
+                          {room.reserved ? 'Reservado' : 'Reservar'}
                         </button>
                       </div>
                     </div>
