@@ -38,10 +38,29 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 90%;
+  max-width: none;
+  margin: 0;
+  width: 100vw;
   padding: 0 20px;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.navbar-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
 }
 
 .navbar-brand {
@@ -817,7 +836,7 @@ body {
   justify-content: space-between;
   align-items: stretch;
   max-width: 1000px;
-  background-color: rgba(217, 217, 217, 0.9); /* Adicionado transparência */
+  background-color: #2d2a26 !important; /* Fundo escuro igual à tabela */
   box-shadow: 0 0 40px rgba(80, 76, 74, 0.3);
   overflow: hidden;
   margin: 0 auto;

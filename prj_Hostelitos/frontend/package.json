@@ -15,9 +15,13 @@
     "@mui/icons-material": "^7.1.0",
     "@mui/material": "^7.1.0",
     "axios": "^1.8.4",
+    "date-fns": "^4.1.0",
+    "firebase": "^11.9.1",
     "material-ui-popup-state": "^5.3.6",
     "react": "^19.0.0",
+    "react-datepicker": "^8.4.0",
     "react-dom": "^19.0.0",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^7.4.1"
   },
   "devDependencies": {
