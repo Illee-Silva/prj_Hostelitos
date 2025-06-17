@@ -54,83 +54,54 @@ export default function Register() {
   };
 
   return (
-    <div className="hostelitos-page" style={{ paddingTop: 110 }}>
-      <div className="hostelitos-box" style={{ maxWidth: 400, margin: '0 auto', borderRadius: 18 }}>
-        <div id="login-form" style={{ padding: 32 }}>
-          <p className="form-title" style={{ color: '#DF5323', textAlign: 'center' }}>Cadastro</p>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-            <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label htmlFor="name" className="login-label" style={{ textAlign: 'left', color: '#DF5323', fontWeight: 600 }}>Nome:</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="input-field"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                style={{ borderRadius: 8, padding: 8, border: '1px solid #ccc', background: '#222', color: '#fff' }}
-              />
+    <div className="login-page">
+      <div className="login-box">
+        <div className="login-form-half" style={{ flex: 1, padding: 32, display: "flex", flexDirection: "column", justifyContent: "center", color: "#fff", fontFamily: 'Nunito, sans-serif' }}>
+          <p className="form-title" style={{ color: "#DF5323", textAlign: "center", fontSize: 28, marginBottom: 24 }}>
+            Cadastro
+          </p>
+          <form onSubmit={handleSubmit} className="login-form-fields" style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+            <div className="input-group" style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <label htmlFor="name" className="login-label" style={{ textAlign: "left", color: "#DF5323", fontWeight: 600 }}>
+                Nome:
+              </label>
+              <input type="text" id="name" name="name" className="input-field" required value={name} onChange={(e) => setName(e.target.value)} style={{ borderRadius: 8, padding: 12, border: "1px solid #ccc", background: "#222", color: "#fff", fontSize: 16 }} />
             </div>
-            <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label htmlFor="email" className="login-label" style={{ textAlign: 'left', color: '#DF5323', fontWeight: 600 }}>E-mail:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="input-field"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                style={{ borderRadius: 8, padding: 8, border: '1px solid #ccc', background: '#222', color: '#fff' }}
-              />
+            <div className="input-group" style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <label htmlFor="email" className="login-label" style={{ textAlign: "left", color: "#DF5323", fontWeight: 600 }}>
+                E-mail:
+              </label>
+              <input type="email" id="email" name="email" className="input-field" required value={email} onChange={(e) => setEmail(e.target.value)} style={{ borderRadius: 8, padding: 12, border: "1px solid #ccc", background: "#222", color: "#fff", fontSize: 16 }} />
             </div>
-            <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              <label htmlFor="password" className="login-label" style={{ textAlign: 'left', color: '#DF5323', fontWeight: 600 }}>Senha:</label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                className="input-field"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={{ borderRadius: 8, padding: 8, border: '1px solid #ccc', background: '#222', color: '#fff' }}
-              />
+            <div className="input-group" style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <label htmlFor="password" className="login-label" style={{ textAlign: "left", color: "#DF5323", fontWeight: 600 }}>
+                Senha:
+              </label>
+              <input type="password" id="password" name="password" className="input-field" required value={password} onChange={(e) => setPassword(e.target.value)} style={{ borderRadius: 8, padding: 12, border: "1px solid #ccc", background: "#222", color: "#fff", fontSize: 16 }} />
             </div>
-            <button type="submit" className="reserve-button" style={{ width: '100%', marginTop: 10, borderRadius: 8 }}>Cadastrar</button>
-            {error && <p style={{ color: "red", textAlign: 'center' }}>{error}</p>}
-            {success && <p style={{ color: "green", textAlign: 'center' }}>{success}</p>}
+            <button type="submit" className="reserve-button" style={{ width: "100%", marginTop: 10, borderRadius: 8, backgroundColor: "#DF5323", color: "#fff", padding: 12, border: "none", cursor: "pointer", fontSize: 16 }}>
+              Cadastrar
+            </button>
+            {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+            {success && <p style={{ color: "green", textAlign: "center" }}>{success}</p>}
           </form>
           {isAdmin && (
             <>
-              <button
-                onClick={handleTestMongo}
-                style={{ marginTop: 10 }}
-                className="reserve-button"
-              >
+              <button onClick={handleTestMongo} className="reserve-button" style={{ marginTop: 10 }}>
                 Testar conexão MongoDB
               </button>
               {mongoStatus && (
-                <p style={{ marginTop: 5, color: mongoStatus.includes("OK") ? "green" : "red" }}>
-                  {mongoStatus}
-                </p>
+                <p style={{ marginTop: 5, color: mongoStatus.includes("OK") ? "green" : "red" }}>{mongoStatus}</p>
               )}
             </>
           )}
-          <div className="login-links" style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <button
-              onClick={() => navigate("/login")}
-              className="register-link"
-              style={{ background: 'none', color: '#DF5323', border: 'none', cursor: 'pointer', fontWeight: 600 }}
-            >
+          <div className="login-links" style={{ marginTop: 18, display: "flex", flexDirection: "column", gap: 8 }}>
+            <button onClick={() => navigate("/login")} className="register-link" style={{ background: "none", color: "#DF5323", border: "none", cursor: "pointer", fontWeight: 600, padding: 10, borderRadius: 8, textAlign: "center", fontSize: 16 }}>
               Já tem conta? Entrar
             </button>
           </div>
         </div>
-        <div className="illustration-wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'none' }}>
-          <img src="/img/image cadastro.jpg" alt="Register illustration" style={{ maxWidth: 180, borderRadius: 12 }} />
-        </div>
+        <div className="login-img-half" style={{ flex: 1, backgroundImage: "url('/img/image cadastro.jpg')", backgroundSize: "cover", backgroundPosition: "center" }}></div>
       </div>
     </div>
   );

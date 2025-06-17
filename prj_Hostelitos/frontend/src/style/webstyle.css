@@ -829,258 +829,131 @@ body {
   min-height: calc(100vh - 80px);
   padding: 80px 20px 20px;
   width: 100%;
+  background: none;
 }
 
 .login-box {
   display: flex;
-  justify-content: space-between;
-  align-items: stretch;
-  max-width: 1000px;
-  background-color: #2d2a26 !important; /* Fundo escuro igual à tabela */
+  flex-direction: row;
+  width: 100%;
+  max-width: 700px;
+  background-color: #2d2a26;
   box-shadow: 0 0 40px rgba(80, 76, 74, 0.3);
   overflow: hidden;
   margin: 0 auto;
   border-radius: 12px;
-  min-height: 600px;
+  min-height: 400px;
 }
 
 #login-form {
-  flex: 1;
-  max-width: 480px;
-  padding: 60px;
+  flex: 1 1 50%;
+  max-width: 50%;
+  padding: 48px 32px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-#login-form p.form-title {
-  color: #df5323;
-  font-family: "Nunito", sans-serif;
-  font-size: 42px;
-  font-weight: bold;
-  line-height: 1;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-#login-form .input-group {
-  margin-bottom: 24px;
-}
-
-#login-form .login-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #000000;
-  font-size: 16px;
-}
-
-#login-form .input-field {
-  width: 100%;
-  padding: 14px 20px;
-  border: 1px solid #615f5f;
-  border-radius: 28px;
-  font-size: 16px;
-  background-color: #9e9e9e;
-  color: #000000;
-  transition: all 0.3s;
-  font-family: "Nunito", sans-serif;
-}
-
-#login-form .input-field:focus {
-  border-color: #df5323;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(223, 83, 35, 0.3);
-}
-
-.login-button {
-  background: linear-gradient(to right, #df5323, #c74a1f);
-  color: white;
-  border: none;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 700;
-  border-radius: 15px;
-  cursor: pointer;
-  transition: all 0.3s;
-  width: 100%;
-  font-family: "Nunito", sans-serif;
-  margin-top: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.login-button:hover {
-  background: linear-gradient(to right, #c74a1f, #df5323);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(233, 82, 32, 0.753);
-}
-
-.login-links {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 25px;
-}
-
-.register-link,
-.forgot-password {
   background: none;
-  border: none;
-  color: #df5323;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 5px;
-  text-decoration: none;
-  transition: all 0.3s;
-  font-family: "Nunito", sans-serif;
-}
-
-.register-link:hover,
-.forgot-password:hover {
-  color: #fffcf2;
-  text-decoration: underline;
 }
 
 .illustration-wrapper {
-  flex: 1;
+  flex: 1 1 50%;
+  max-width: 50%;
   display: flex;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
-  background-color: #403d39;
+  background: #403d39;
   padding: 0;
   overflow: hidden;
 }
 
 .illustration-wrapper img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   object-position: center;
   display: block;
+  border-radius: 0 12px 12px 0;
+  max-height: 350px;
 }
 
-/* RESPONSIVIDADE DO LOGIN */
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 768px) {
   .login-box {
     flex-direction: column;
-    max-width: 600px;
+    max-width: 95vw;
     min-height: auto;
   }
-
-  #login-form {
-    padding: 40px 30px;
+  #login-form, .illustration-wrapper {
     max-width: 100%;
+    flex: 1 1 100%;
   }
-
-  .illustration-wrapper {
-    height: 300px;
-    width: 100%;
+  .illustration-wrapper img {
+    border-radius: 0 0 12px 12px;
+    max-height: 180px;
   }
 }
 
-@media screen and (max-width: 480px) {
-  #login-form {
-    padding: 30px 20px;
-  }
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 80px 20px 20px;
+  width: 100%;
+  background: none;
+}
 
-  #login-form p.form-title {
-    font-size: 32px;
-  }
+.login-box.login-bg-half {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 700px;
+  background-color: #2d2a26;
+  box-shadow: 0 0 40px rgba(80, 76, 74, 0.3);
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 12px;
+  min-height: 400px;
+}
 
-  .login-links {
+.login-form-half {
+  flex: 1 1 50%;
+  max-width: 50%;
+  padding: 48px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: none;
+}
+
+.login-img-half {
+  flex: 1 1 50%;
+  max-width: 50%;
+  background: url('/img/image login.jpg') center center/cover no-repeat;
+  min-height: 400px;
+  border-radius: 0 12px 12px 0;
+}
+
+@media screen and (max-width: 768px) {
+  .login-box.login-bg-half {
     flex-direction: column;
-    gap: 12px;
-    align-items: center;
+    max-width: 95vw;
+    min-height: auto;
   }
-}
-
-/* Melhorias extras para telas muito pequenas (até 375px) */
-@media screen and (max-width: 375px) {
-  .navbar-title {
-    font-size: 16px;
+  .login-form-half, .login-img-half {
+    max-width: 100%;
+    flex: 1 1 100%;
   }
-  .navbar-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .footer-section {
-    padding: 0.5rem;
-    min-width: 120px;
-    font-size: 0.9rem;
-  }
-  .footer-section h3 {
-    font-size: 1rem;
-  }
-  .site-footer {
-    padding: 1.5rem 0 0;
-  }
-  .content-wrap, .page-content {
-    padding: 8px;
-  }
-  .menu-button {
-    font-size: 0.9rem !important;
-    padding: 6px 10px !important;
-  }
-  .navbar-link {
-    font-size: 0.9rem;
-    padding: 6px 8px;
+  .login-img-half {
+    min-height: 180px;
+    border-radius: 0 0 12px 12px;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .home-title {
-    font-size: 1.2rem;
-    padding: 0 8px 10px 8px;
-    word-break: break-word;
-    text-align: center;
+  .login-form-half {
+    padding: 24px 8px;
   }
-}
-
-@media screen and (max-width: 375px) {
-  .home-title {
-    font-size: 1rem;
-    padding: 0 4px 8px 4px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .navbar-container {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 0 4px;
-  }
-  .navbar-left, .navbar-right {
-    width: 100%;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-  }
-  .navbar-center {
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  .navbar-title {
-    font-size: 1.1rem;
-    margin-left: 6px;
-    text-align: center;
-    word-break: break-word;
-  }
-  .navbar-logo img, .navbar-icon {
-    width: 32px;
-    height: 32px;
-  }
-  .navbar-right {
-    margin-top: 4px;
-    margin-bottom: 4px;
-  }
-  .menu-button, .navbar-link, .MuiButton-root {
-    font-size: 0.9rem !important;
-    padding: 6px 8px !important;
-    min-width: 0 !important;
+  .login-img-half {
+    min-height: 120px;
   }
 }

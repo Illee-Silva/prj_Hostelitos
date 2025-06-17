@@ -23,50 +23,16 @@ export default function Login() {
   };
 
   return (
-    <div className="hostelitos-page" style={{ paddingTop: 110 }}>
-      <div
-        className="hostelitos-box"
-        style={{
-          maxWidth: 400,
-          margin: "0 auto",
-          borderRadius: 18,
-          padding: 32,
-          color: "#fff",
-        }}
-      >
-        <div id="login-form" style={{ padding: 32 }}>
-          <p
-            className="form-title"
-            style={{ color: "#DF5323", textAlign: "center" }}
-          >
+    <div className="login-page" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+      <div className="login-box" style={{ display: "flex", maxWidth: 800, width: "100%", borderRadius: 18, overflow: "hidden" }}>
+        <div className="login-form-half" style={{ flex: 1, padding: 32, display: "flex", flexDirection: "column", justifyContent: "center", color: "#fff" }}>
+          <p className="form-title" style={{ color: "#DF5323", textAlign: "center", fontSize: 28, marginBottom: 24 }}>
             Login
           </p>
 
-          <form
-            onSubmit={handleSubmit}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 18,
-            }}
-          >
-            <div
-              className="input-group"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 6,
-              }}
-            >
-              <label
-                htmlFor="email"
-                className="login-label"
-                style={{
-                  textAlign: "left",
-                  color: "#DF5323",
-                  fontWeight: 600,
-                }}
-              >
+          <form onSubmit={handleSubmit} className="login-form-fields" style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+            <div className="input-group" style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <label htmlFor="email" className="login-label" style={{ textAlign: "left", color: "#DF5323", fontWeight: 600 }}>
                 E-mail:
               </label>
               <input
@@ -77,33 +43,12 @@ export default function Login() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                style={{
-                  borderRadius: 8,
-                  padding: 8,
-                  border: "1px solid #ccc",
-                  background: "#222",
-                  color: "#fff",
-                }}
+                style={{ borderRadius: 8, padding: 12, border: "1px solid #ccc", background: "#222", color: "#fff", fontSize: 16 }}
               />
             </div>
 
-            <div
-              className="input-group"
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 6,
-              }}
-            >
-              <label
-                htmlFor="password"
-                className="login-label"
-                style={{
-                  textAlign: "left",
-                  color: "#DF5323",
-                  fontWeight: 600,
-                }}
-              >
+            <div className="input-group" style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+              <label htmlFor="password" className="login-label" style={{ textAlign: "left", color: "#DF5323", fontWeight: 600 }}>
                 Senha:
               </label>
               <input
@@ -114,13 +59,7 @@ export default function Login() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                style={{
-                  borderRadius: 8,
-                  padding: 8,
-                  border: "1px solid #ccc",
-                  background: "#222",
-                  color: "#fff",
-                }}
+                style={{ borderRadius: 8, padding: 12, border: "1px solid #ccc", background: "#222", color: "#fff", fontSize: 16 }}
               />
             </div>
 
@@ -133,9 +72,10 @@ export default function Login() {
                 borderRadius: 8,
                 backgroundColor: "#DF5323",
                 color: "#fff",
-                padding: 10,
+                padding: 12,
                 border: "none",
                 cursor: "pointer",
+                fontSize: 16,
               }}
             >
               Entrar
@@ -146,6 +86,7 @@ export default function Login() {
                   color: "red",
                   textAlign: "center",
                   marginTop: 10,
+                  fontSize: 14,
                 }}
               >
                 {error}
@@ -174,6 +115,7 @@ export default function Login() {
                 padding: 10,
                 borderRadius: 8,
                 textAlign: "center",
+                fontSize: 16,
               }}
             >
               Cadastra-se
@@ -188,6 +130,7 @@ export default function Login() {
                 padding: 10,
                 borderRadius: 8,
                 textAlign: "center",
+                fontSize: 16,
               }}
             >
               Esqueceu a senha?
@@ -195,24 +138,14 @@ export default function Login() {
           </div>
         </div>
         <div
-          className="illustration-wrapper"
+          className="login-img-half"
           style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            background: "none",
+            flex: 1,
+            backgroundImage: "url('/img/image login.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
-        >
-          <img
-            src="/img/image login.jpg"
-            alt="Login illustration"
-            style={{
-              maxWidth: 180,
-              borderRadius: 12,
-              marginTop: 20,
-            }}
-          />
-        </div>
+        ></div>
       </div>
     </div>
   );
