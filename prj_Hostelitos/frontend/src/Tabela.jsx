@@ -10,7 +10,8 @@ export default function Tabela() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/data')
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await axios.get(`${apiUrl}/api/data`)
         if (response.data.success) {
           setData(response.data.data)
         }

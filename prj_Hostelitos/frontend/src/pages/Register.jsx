@@ -12,11 +12,12 @@ export default function Register() {
   const [success, setSuccess] = useState("");
   const [mongoStatus, setMongoStatus] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
     const userEmail = localStorage.getItem("userEmail");
     if (!userEmail) return;
-    fetch(`http://localhost:5000/api/users?email=${encodeURIComponent(userEmail)}`)
+    fetch(`${apiUrl}/api/users?email=${encodeURIComponent(userEmail)}`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.user && data.user.admin) setIsAdmin(true);
@@ -40,7 +41,7 @@ export default function Register() {
   const handleTestMongo = async () => {
     setMongoStatus("Testando...");
     try {
-      const res = await fetch("http://localhost:5000/api/data");
+      const res = await fetch(`${apiUrl}/api/data`);
       const data = await res.json();
       if (data.success) {
         setMongoStatus("Conexão com MongoDB: OK");

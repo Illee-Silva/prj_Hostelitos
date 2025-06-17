@@ -10,7 +10,8 @@ export function useLoggedUser() {
         setUser(null);
         return;
       }
-      fetch(`http://localhost:5000/api/users?email=${encodeURIComponent(email)}`)
+      const apiUrl = import.meta.env.VITE_API_URL;
+      fetch(`${apiUrl}/api/users?email=${encodeURIComponent(email)}`)
         .then(res => res.json())
         .then(data => {
           if (data.success && data.user) setUser(data.user);

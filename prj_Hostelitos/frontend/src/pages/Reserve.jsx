@@ -20,8 +20,10 @@ export default function Reserve() {
   const [inputMin, setInputMin] = useState(0);
   const [sliderPrice, setSliderPrice] = useState(0);
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
-    fetch("http://localhost:5000/api/rooms")
+    fetch(`${apiUrl}/api/rooms`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {
@@ -82,7 +84,7 @@ export default function Reserve() {
   async function handleReserve(roomId) {
     if (!user) return;
     try {
-      const res = await fetch("http://localhost:5000/api/reserve", {
+      const res = await fetch(`${apiUrl}/api/reserve`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
