@@ -159,15 +159,29 @@ def reserve_room():
         room_id = data.get('room_id')
         user_name = data.get('user_name')
         user_email = data.get('user_email')
+        check_in = data.get('check_in')
+        check_out = data.get('check_out')
+        guests = data.get('guests')
+        total = data.get('total')
+        phone = data.get('phone')  # <-- Adiciona o campo phone
         if not room_id or not user_name or not user_email:
             return jsonify({'success': False, 'error': 'Dados incompletos'}), 400
         client = MongoClient(os.getenv("MONGO_URI"), serverSelectionTimeoutMS=5000)
         db = client[DB_NAME]
         collection = db['rooms']
-        # Atualiza o quarto, marcando como reservado
+        # Atualiza o quarto, marcando como reservado e salvando todos os dados da reserva
+        update_fields = {
+            'reserved': True,
+            'reserved_by': {'name': user_name, 'email': user_email},
+            'check_in': check_in,
+            'check_out': check_out,
+            'guests': guests,
+            'total': total,
+            'phone': phone  # <-- Salva o telefone
+        }
         result = collection.update_one(
             {'_id': ObjectId(room_id), 'reserved': {'$ne': True}},
-            {'$set': {'reserved': True, 'reserved_by': {'name': user_name, 'email': user_email}}}
+            {'$set': update_fields}
         )
         if result.matched_count == 0:
             return jsonify({'success': False, 'error': 'Quarto já reservado ou não encontrado'}), 409
@@ -201,7 +215,11 @@ def cancel_reservation():
         client = MongoClient(os.getenv("MONGO_URI"), serverSelectionTimeoutMS=5000)
         db = client[DB_NAME]
         collection = db['rooms']
-        result = collection.update_one({'_id': ObjectId(room_id)}, {'$set': {'reserved': False}, '$unset': {'reserved_by': ""}})
+        # Unset all reservation-related fields
+        result = collection.update_one(
+            {'_id': ObjectId(room_id)},
+            {'$set': {'reserved': False}, '$unset': {'reserved_by': "", 'check_in': "", 'check_out': "", 'guests': "", 'total': "", 'phone': ""}}
+        )
         if result.matched_count == 0:
             return jsonify({'success': False, 'error': 'Reserva não encontrada'}), 404
         return jsonify({'success': True})
@@ -221,3 +239,17 @@ def test_mongo():
         return jsonify({'success': True, 'message': 'Conexão com MongoDB OK'})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
+
+@app.route('/api/rooms/<room_id>', methods=['DELETE'])
+@cross_origin(origins=["http://localhost:5173"], methods=["DELETE", "OPTIONS"])
+def delete_room(room_id):
+    try:
+        client = MongoClient(os.getenv("MONGO_URI"), serverSelectionTimeoutMS=5000)
+        db = client[DB_NAME]
+        collection = db['rooms']
+        result = collection.delete_one({'_id': ObjectId(room_id)})
+        if result.deleted_count == 0:
+            return jsonify({'success': False, 'error': 'Quarto não encontrado'}), 404
+        return jsonify({'success': True})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500

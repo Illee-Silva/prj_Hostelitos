@@ -836,7 +836,7 @@ body {
   justify-content: space-between;
   align-items: stretch;
   max-width: 1000px;
-  background-color: rgba(217, 217, 217, 0.9); /* Adicionado transparência */
+  background-color: #2d2a26 !important; /* Fundo escuro igual à tabela */
   box-shadow: 0 0 40px rgba(80, 76, 74, 0.3);
   overflow: hidden;
   margin: 0 auto;

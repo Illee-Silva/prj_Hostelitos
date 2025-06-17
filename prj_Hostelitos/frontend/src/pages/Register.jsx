@@ -53,16 +53,13 @@ export default function Register() {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-box">
-        <div id="login-form">
-          <p className="form-title">Cadastro</p>
-
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label htmlFor="name" className="login-label">
-                Nome:
-              </label>
+    <div className="hostelitos-page" style={{ paddingTop: 110 }}>
+      <div className="hostelitos-box" style={{ maxWidth: 400, margin: '0 auto', borderRadius: 18 }}>
+        <div id="login-form" style={{ padding: 32 }}>
+          <p className="form-title" style={{ color: '#DF5323', textAlign: 'center' }}>Cadastro</p>
+          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+            <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <label htmlFor="name" className="login-label" style={{ textAlign: 'left', color: '#DF5323', fontWeight: 600 }}>Nome:</label>
               <input
                 type="text"
                 id="name"
@@ -71,13 +68,11 @@ export default function Register() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
+                style={{ borderRadius: 8, padding: 8, border: '1px solid #ccc', background: '#222', color: '#fff' }}
               />
             </div>
-
-            <div className="input-group">
-              <label htmlFor="email" className="login-label">
-                E-mail:
-              </label>
+            <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <label htmlFor="email" className="login-label" style={{ textAlign: 'left', color: '#DF5323', fontWeight: 600 }}>E-mail:</label>
               <input
                 type="email"
                 id="email"
@@ -86,13 +81,11 @@ export default function Register() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                style={{ borderRadius: 8, padding: 8, border: '1px solid #ccc', background: '#222', color: '#fff' }}
               />
             </div>
-
-            <div className="input-group">
-              <label htmlFor="password" className="login-label">
-                Senha:
-              </label>
+            <div className="input-group" style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <label htmlFor="password" className="login-label" style={{ textAlign: 'left', color: '#DF5323', fontWeight: 600 }}>Senha:</label>
               <input
                 type="password"
                 id="password"
@@ -101,21 +94,19 @@ export default function Register() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={{ borderRadius: 8, padding: 8, border: '1px solid #ccc', background: '#222', color: '#fff' }}
               />
             </div>
-
-            <button type="submit" className="login-button login-form-button">
-              Cadastrar
-            </button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {success && <p style={{ color: "green" }}>{success}</p>}
+            <button type="submit" className="reserve-button" style={{ width: '100%', marginTop: 10, borderRadius: 8 }}>Cadastrar</button>
+            {error && <p style={{ color: "red", textAlign: 'center' }}>{error}</p>}
+            {success && <p style={{ color: "green", textAlign: 'center' }}>{success}</p>}
           </form>
           {isAdmin && (
             <>
               <button
                 onClick={handleTestMongo}
                 style={{ marginTop: 10 }}
-                className="login-button login-form-button"
+                className="reserve-button"
               >
                 Testar conexão MongoDB
               </button>
@@ -126,18 +117,18 @@ export default function Register() {
               )}
             </>
           )}
-          <div className="login-links">
+          <div className="login-links" style={{ marginTop: 18, display: 'flex', flexDirection: 'column', gap: 8 }}>
             <button
               onClick={() => navigate("/login")}
               className="register-link"
+              style={{ background: 'none', color: '#DF5323', border: 'none', cursor: 'pointer', fontWeight: 600 }}
             >
               Já tem conta? Entrar
             </button>
           </div>
         </div>
-
-        <div className="illustration-wrapper">
-          <img src="/img/image cadastro.jpg" alt="Register illustration" />
+        <div className="illustration-wrapper" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'none' }}>
+          <img src="/img/image cadastro.jpg" alt="Register illustration" style={{ maxWidth: 180, borderRadius: 12 }} />
         </div>
       </div>
     </div>

@@ -23,14 +23,50 @@ export default function Login() {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-box">
-        <div id="login-form">
-          <p className="form-title">Login</p>
+    <div className="hostelitos-page" style={{ paddingTop: 110 }}>
+      <div
+        className="hostelitos-box"
+        style={{
+          maxWidth: 400,
+          margin: "0 auto",
+          borderRadius: 18,
+          padding: 32,
+          color: "#fff",
+        }}
+      >
+        <div id="login-form" style={{ padding: 32 }}>
+          <p
+            className="form-title"
+            style={{ color: "#DF5323", textAlign: "center" }}
+          >
+            Login
+          </p>
 
-          <form onSubmit={handleSubmit}>
-            <div className="input-group">
-              <label htmlFor="email" className="login-label">
+          <form
+            onSubmit={handleSubmit}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 18,
+            }}
+          >
+            <div
+              className="input-group"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 6,
+              }}
+            >
+              <label
+                htmlFor="email"
+                className="login-label"
+                style={{
+                  textAlign: "left",
+                  color: "#DF5323",
+                  fontWeight: 600,
+                }}
+              >
                 E-mail:
               </label>
               <input
@@ -41,11 +77,33 @@ export default function Login() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                style={{
+                  borderRadius: 8,
+                  padding: 8,
+                  border: "1px solid #ccc",
+                  background: "#222",
+                  color: "#fff",
+                }}
               />
             </div>
 
-            <div className="input-group">
-              <label htmlFor="password" className="login-label">
+            <div
+              className="input-group"
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: 6,
+              }}
+            >
+              <label
+                htmlFor="password"
+                className="login-label"
+                style={{
+                  textAlign: "left",
+                  color: "#DF5323",
+                  fontWeight: 600,
+                }}
+              >
                 Senha:
               </label>
               <input
@@ -56,28 +114,104 @@ export default function Login() {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                style={{
+                  borderRadius: 8,
+                  padding: 8,
+                  border: "1px solid #ccc",
+                  background: "#222",
+                  color: "#fff",
+                }}
               />
             </div>
 
-            <button type="submit" className="login-button login-form-button">
+            <button
+              type="submit"
+              className="reserve-button"
+              style={{
+                width: "100%",
+                marginTop: 10,
+                borderRadius: 8,
+                backgroundColor: "#DF5323",
+                color: "#fff",
+                padding: 10,
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
               Entrar
             </button>
-            {error && <p style={{ color: "red" }}>{error}</p>}
+            {error && (
+              <p
+                style={{
+                  color: "red",
+                  textAlign: "center",
+                  marginTop: 10,
+                }}
+              >
+                {error}
+              </p>
+            )}
           </form>
 
-          <div className="login-links">
+          <div
+            className="login-links"
+            style={{
+              marginTop: 18,
+              display: "flex",
+              flexDirection: "column",
+              gap: 8,
+            }}
+          >
             <button
               onClick={() => navigate("/register")}
               className="register-link"
+              style={{
+                background: "none",
+                color: "#DF5323",
+                border: "none",
+                cursor: "pointer",
+                fontWeight: 600,
+                padding: 10,
+                borderRadius: 8,
+                textAlign: "center",
+              }}
             >
               Cadastra-se
             </button>
-            <button className="forgot-password">Esqueceu a senha?</button>
+            <button
+              className="forgot-password"
+              style={{
+                background: "none",
+                color: "#888",
+                border: "none",
+                cursor: "pointer",
+                padding: 10,
+                borderRadius: 8,
+                textAlign: "center",
+              }}
+            >
+              Esqueceu a senha?
+            </button>
           </div>
         </div>
-
-        <div className="illustration-wrapper">
-          <img src="/img/image login.jpg" alt="Login illustration" />
+        <div
+          className="illustration-wrapper"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            background: "none",
+          }}
+        >
+          <img
+            src="/img/image login.jpg"
+            alt="Login illustration"
+            style={{
+              maxWidth: 180,
+              borderRadius: 12,
+              marginTop: 20,
+            }}
+          />
         </div>
       </div>
     </div>

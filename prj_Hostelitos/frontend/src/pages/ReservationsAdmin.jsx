@@ -40,15 +40,15 @@ export default function ReservationsAdmin() {
         body: JSON.stringify({ room_id: roomId })
       });
       const data = await res.json();
+      setCanceling(""); // Garante reset mesmo se erro
       if (data.success) {
         setReservations(reservations => reservations.filter(r => r._id !== roomId));
       } else {
         alert(data.error || "Erro ao cancelar reserva");
       }
     } catch (err) {
+      setCanceling(""); // Garante reset mesmo se erro
       alert("Erro ao cancelar reserva");
-    } finally {
-      setCanceling("");
     }
   }
 
@@ -71,6 +71,7 @@ export default function ReservationsAdmin() {
                 <th style={{ padding: 8 }}>Check-out</th>
                 <th style={{ padding: 8 }}>Dias</th>
                 <th style={{ padding: 8 }}>Total</th>
+                <th style={{ padding: 8 }}>Telefone</th>
                 <th style={{ padding: 8 }}>Ações</th>
               </tr>
             </thead>
@@ -87,9 +88,10 @@ export default function ReservationsAdmin() {
                     <td style={{ padding: 8 }}>{formatDateBR(room.check_out)}</td>
                     <td style={{ padding: 8 }}>{nights}</td>
                     <td style={{ padding: 8 }}>${total.toLocaleString()}</td>
+                    <td style={{ padding: 8 }}>{room.phone || '-'}</td>
                     <td style={{ padding: 8 }}>
                       <button
-                        className="reserve-button reserved"
+                        className={`reserve-button${canceling === room._id ? ' reserved' : ''}`}
                         style={{marginTop:0, minWidth: 90}}
                         onClick={() => handleCancel(room._id)}
                         disabled={canceling === room._id}

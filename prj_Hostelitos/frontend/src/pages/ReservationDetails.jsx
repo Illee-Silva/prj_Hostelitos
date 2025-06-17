@@ -18,7 +18,7 @@ export default function ReservationDetails() {
     guests: 1,
     cpf: '',
     address: '',
-    payment: ''
+    phone: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -62,7 +62,7 @@ export default function ReservationDetails() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.checkIn || !formData.checkOut || !formData.cpf || !formData.address || !formData.payment) {
+    if (!formData.checkIn || !formData.checkOut || !formData.cpf || !formData.address || !formData.phone) {
       alert('Por favor, preencha todos os campos obrigatórios');
       return;
     }
@@ -84,7 +84,8 @@ export default function ReservationDetails() {
           guests: formData.guests,
           cpf: formData.cpf,
           address: formData.address,
-          payment: formData.payment
+          phone: formData.phone,
+          total: totalPrice // <-- Adiciona o valor total
         })
       });
       const data = await res.json();
@@ -250,20 +251,16 @@ export default function ReservationDetails() {
                 />
               </div>
               <div className="form-group">
-                <label className="form-label">Forma de Pagamento *</label>
-                <select
-                  name="payment"
-                  value={formData.payment}
+                <label className="form-label">Telefone *</label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleInputChange}
+                  placeholder="(99) 99999-9999"
                   required
-                  className="form-select"
-                >
-                  <option value="">Selecione</option>
-                  <option value="cartao">Cartão de Crédito</option>
-                  <option value="pix">PIX</option>
-                  <option value="boleto">Boleto</option>
-                  <option value="dinheiro">Dinheiro</option>
-                </select>
+                  className="form-input"
+                />
               </div>
               {nights > 0 && (
                 <div className="total-price-summary">

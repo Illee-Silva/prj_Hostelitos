@@ -4,14 +4,9 @@ import { useNavigate } from "react-router-dom";
 export default function RoomRegister() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [type, setType] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [image, setImage] = useState("");
-  const [maxGuests, setMaxGuests] = useState(1);
-  const [success, setSuccess] = useState("");
+  const [rooms, setRooms] = useState([]);
   const [error, setError] = useState("");
-  const [mongoStatus, setMongoStatus] = useState("");
+  const [deleting, setDeleting] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,110 +32,91 @@ export default function RoomRegister() {
       });
   }, [navigate]);
 
+  useEffect(() => {
+    if (!isAdmin) return;
+    fetch("http://localhost:5000/api/rooms")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) setRooms(data.rooms);
+        else setError(data.error || "Erro ao buscar quartos");
+      })
+      .catch(err => setError(err.message));
+  }, [isAdmin]);
+
+  async function handleDelete(roomId) {
+    if (!window.confirm("Deseja apagar este quarto?")) return;
+    setDeleting(roomId);
+    try {
+      const res = await fetch(`http://localhost:5000/api/rooms/${roomId}`, {
+        method: "DELETE"
+      });
+      const data = await res.json();
+      setDeleting("");
+      if (data.success) {
+        setRooms(rooms => rooms.filter(r => r._id !== roomId));
+      } else {
+        alert(data.error || "Erro ao apagar quarto");
+      }
+    } catch (err) {
+      setDeleting("");
+      alert("Erro ao apagar quarto");
+    }
+  }
+
   if (loading) return null;
   if (!isAdmin) {
     navigate("/login");
     return null;
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSuccess("");
-    setError("");
-    try {
-      const formData = new FormData();
-      formData.append("type", type);
-      formData.append("description", description);
-      formData.append("price", price);
-      formData.append("image", image);
-      formData.append("max_guests", maxGuests);
-      const res = await fetch("http://localhost:5000/api/rooms", {
-        method: "POST",
-        body: formData
-      });
-      const data = await res.json();
-      if (data.success) {
-        setSuccess("Quarto cadastrado com sucesso!");
-        setType(""); setDescription(""); setPrice(""); setImage(""); setMaxGuests(1);
-      } else {
-        setError(data.error || "Erro ao cadastrar quarto");
-      }
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  const handleTestMongo = () => {
-    fetch("http://localhost:5000/api/test-mongo")
-      .then(res => res.json())
-      .then(data => {
-        setMongoStatus(data.success ? "Conexão com MongoDB OK" : "Erro na conexão com MongoDB");
-      })
-      .catch(() => setMongoStatus("Erro na conexão com MongoDB"));
-  };
-
   return (
-    <div className="login-page">
-      <div className="login-box">
-        <div id="login-form">
-          <p className="form-title">Cadastro de Quarto</p>
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <div className="input-group">
-              <label className="login-label">Tipo:</label>
-              <select value={type} onChange={e => setType(e.target.value)} required className="input-field">
-                <option value="">Selecione o tipo</option>
-                <option value="Suíte">Suíte</option>
-                <option value="Duplo">Duplo</option>
-                <option value="Simples">Simples</option>
-              </select>
-            </div>
-            <div className="input-group">
-              <label className="login-label">Descrição:</label>
-              <textarea value={description} onChange={e => setDescription(e.target.value)} required className="input-field" />
-            </div>
-            <div className="input-group">
-              <label className="login-label">Preço:</label>
-              <input type="number" value={price} onChange={e => setPrice(e.target.value)} required className="input-field" />
-            </div>
-            <div className="input-group">
-              <label className="login-label">Imagem:</label>
-              <input type="file" accept="image/*" onChange={e => setImage(e.target.files[0])} required className="input-field" />
-            </div>
-            <div className="input-group">
-              <label className="login-label">Hóspedes limite:</label>
-              <input
-                type="range"
-                min="1"
-                max="10"
-                value={maxGuests}
-                onChange={e => setMaxGuests(Number(e.target.value))}
-                className="input-field"
-                style={{ width: '100%' }}
-              />
-              <div style={{ width: '100%', textAlign: 'right', marginTop: 2, color: '#DF5323', fontWeight: 600 }}>
-                {maxGuests} {maxGuests === 1 ? 'hóspede' : 'hóspedes'}
-              </div>
-            </div>
-            <button type="submit" className="login-button login-form-button">Cadastrar Quarto</button>
-            {success && <p style={{ color: 'green' }}>{success}</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-          </form>
+    <div className="hostelitos-page">
+      <div className="hostelitos-box">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+          <h2 className="section-title">Quartos Cadastrados</h2>
           <button
-            onClick={handleTestMongo}
-            style={{ marginTop: 10 }}
-            className="login-button login-form-button"
+            className="reserve-button"
+            style={{ fontSize: 24, padding: '0.3em 0.7em', fontWeight: 700 }}
+            onClick={() => navigate("/room-register/add")}
+            title="Adicionar Quarto"
           >
-            Testar conexão MongoDB
+            +
           </button>
-          {mongoStatus && (
-            <p style={{ marginTop: 5, color: mongoStatus.includes("OK") ? "green" : "red" }}>
-              {mongoStatus}
-            </p>
-          )}
         </div>
-        <div className="illustration-wrapper">
-          <img src="/img/image cadastro.jpg" alt="Register illustration" />
-        </div>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <table style={{ width: '100%', background: 'transparent', color: '#fff', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr style={{ background: '#252220' }}>
+              <th style={{ padding: 8 }}>Tipo</th>
+              <th style={{ padding: 8 }}>Descrição</th>
+              <th style={{ padding: 8 }}>Preço</th>
+              <th style={{ padding: 8 }}>Hóspedes</th>
+              <th style={{ padding: 8 }}>Reservado?</th>
+              <th style={{ padding: 8 }}>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rooms.map(room => (
+              <tr key={room._id} style={{ borderBottom: '1px solid #3a3632' }}>
+                <td style={{ padding: 8 }}>{room.type}</td>
+                <td style={{ padding: 8 }}>{room.description}</td>
+                <td style={{ padding: 8 }}>${Number(room.price).toLocaleString()}</td>
+                <td style={{ padding: 8 }}>{room.max_guests}</td>
+                <td style={{ padding: 8 }}>{room.reserved ? 'Sim' : 'Não'}</td>
+                <td style={{ padding: 8 }}>
+                  <button
+                    className="reserve-button"
+                    style={{ minWidth: 90, background: '#c0392b' }}
+                    onClick={() => handleDelete(room._id)}
+                    disabled={deleting === room._id}
+                  >
+                    {deleting === room._id ? 'Apagando...' : 'Apagar'}
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

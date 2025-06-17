@@ -26,6 +26,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useLoggedUser } from "./hooks/useLoggedUser";
 import Box from '@mui/material/Box';
+import RoomForm from './pages/RoomForm';
 
 export default function App() {
     const user = useLoggedUser();
@@ -71,6 +72,10 @@ export default function App() {
                                                         <EventAvailableIcon className="menu-icon" />
                                                         <Link to="/reserve" className="navbar-link">Reservar</Link>
                                                     </MenuItem>
+                                                    <MenuItem onClick={popupState.close} className="menu-item">
+                                                        <EventAvailableIcon className="menu-icon" />
+                                                        <Link to="/reservations" className="navbar-link">Minhas Reservas</Link>
+                                                    </MenuItem>
                                                 </Menu>
                                             </React.Fragment>
                                         )}
@@ -92,7 +97,7 @@ export default function App() {
                                                     <Menu {...bindMenu(popupState)}>
                                                         <MenuItem onClick={popupState.close} className="menu-item">
                                                             <EventAvailableIcon className="menu-icon" />
-                                                            <Link to="/room-register" className="navbar-link">Cadastrar Quarto</Link>
+                                                            <Link to="/room-register" className="navbar-link">Quartos</Link>
                                                         </MenuItem>
                                                         <MenuItem onClick={popupState.close} className="menu-item">
                                                             <EventAvailableIcon className="menu-icon" />
@@ -158,6 +163,7 @@ export default function App() {
                         <Route path="/reserve" element={<Reserve />} />
                         <Route path="/reservation" element={<ReservationDetails />} />
                         <Route path="/room-register" element={<RoomRegister />} />
+                        <Route path="/room-register/add" element={<RoomForm />} />
                         <Route path="/reservations-admin" element={<ReservationsAdmin />} />
                         <Route path="/reservations" element={<Reservations />} />
                     </Routes>

@@ -47,8 +47,12 @@ export default function Reservations() {
                   <p className="room-type">{room.type}</p>
                   <p className="room-description">{room.description}</p>
                   <p className="room-price">Preço: ${Number(room.price).toLocaleString()}</p>
-                  <p><b>Hóspedes:</b> {room.max_guests}</p>
+                  <p><b>Hóspedes:</b> {room.guests || '-'}</p>
                   <p><b>Status:</b> Reservado</p>
+                  <p><b>Check-in:</b> {room.check_in ? new Date(room.check_in).toLocaleDateString('pt-BR') : '-'}</p>
+                  <p><b>Check-out:</b> {room.check_out ? new Date(room.check_out).toLocaleDateString('pt-BR') : '-'}</p>
+                  <p><b>Telefone:</b> {room.phone || '-'}</p>
+                  <p><b>Valor Total:</b> {room.total ? `R$ ${Number(room.total).toLocaleString('pt-BR', {minimumFractionDigits: 2})}` : '-'}</p>
                 </div>
               </div>
             ))}
