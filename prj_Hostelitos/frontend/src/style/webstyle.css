@@ -994,3 +994,93 @@ body {
     align-items: center;
   }
 }
+
+/* Melhorias extras para telas muito pequenas (até 375px) */
+@media screen and (max-width: 375px) {
+  .navbar-title {
+    font-size: 16px;
+  }
+  .navbar-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .footer-section {
+    padding: 0.5rem;
+    min-width: 120px;
+    font-size: 0.9rem;
+  }
+  .footer-section h3 {
+    font-size: 1rem;
+  }
+  .site-footer {
+    padding: 1.5rem 0 0;
+  }
+  .content-wrap, .page-content {
+    padding: 8px;
+  }
+  .menu-button {
+    font-size: 0.9rem !important;
+    padding: 6px 10px !important;
+  }
+  .navbar-link {
+    font-size: 0.9rem;
+    padding: 6px 8px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-title {
+    font-size: 1.2rem;
+    padding: 0 8px 10px 8px;
+    word-break: break-word;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .home-title {
+    font-size: 1rem;
+    padding: 0 4px 8px 4px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .navbar-container {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 4px;
+  }
+  .navbar-left, .navbar-right {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+  }
+  .navbar-center {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .navbar-title {
+    font-size: 1.1rem;
+    margin-left: 6px;
+    text-align: center;
+    word-break: break-word;
+  }
+  .navbar-logo img, .navbar-icon {
+    width: 32px;
+    height: 32px;
+  }
+  .navbar-right {
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+  .menu-button, .navbar-link, .MuiButton-root {
+    font-size: 0.9rem !important;
+    padding: 6px 8px !important;
+    min-width: 0 !important;
+  }
+}

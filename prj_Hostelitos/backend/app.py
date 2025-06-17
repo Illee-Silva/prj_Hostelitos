@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 load_dotenv()
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:5173", "https://hostelitos.vercel.app"])
 
 # Defina manualmente o nome do banco e da coleção aqui
 DB_NAME = "hostelitos"  # Exemplo
@@ -152,7 +152,7 @@ def create_room():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/reserve', methods=['POST'])
-@cross_origin(origins=["http://localhost:5173"], methods=["POST", "OPTIONS"])
+@cross_origin(origins=["http://localhost:5173", "https://hostelitos.vercel.app"], methods=["POST", "OPTIONS"])
 def reserve_room():
     try:
         data = request.get_json()
@@ -191,7 +191,7 @@ def reserve_room():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/reservations', methods=['GET'])
-@cross_origin(origins=["http://localhost:5173"], methods=["GET"])
+@cross_origin(origins=["http://localhost:5173", "https://hostelitos.vercel.app"], methods=["GET"])
 def get_reservations():
     try:
         client = MongoClient(os.getenv("MONGO_URI"), serverSelectionTimeoutMS=5000)
@@ -205,7 +205,7 @@ def get_reservations():
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/cancel-reservation', methods=['POST'])
-@cross_origin(origins=["http://localhost:5173"], methods=["POST", "OPTIONS"])
+@cross_origin(origins=["http://localhost:5173", "https://hostelitos.vercel.app"], methods=["POST", "OPTIONS"])
 def cancel_reservation():
     try:
         data = request.get_json()
@@ -231,7 +231,7 @@ def serve_image(filename):
     return send_from_directory(UPLOAD_FOLDER, filename)
 
 @app.route('/api/test-mongo', methods=['GET'])
-@cross_origin(origins=["http://localhost:5173"], methods=["GET"])
+@cross_origin(origins=["http://localhost:5173", "https://hostelitos.vercel.app"], methods=["GET"])
 def test_mongo():
     try:
         client = MongoClient(os.getenv("MONGO_URI"), serverSelectionTimeoutMS=5000)
@@ -241,7 +241,7 @@ def test_mongo():
         return jsonify({'success': False, 'error': str(e)})
 
 @app.route('/api/rooms/<room_id>', methods=['DELETE'])
-@cross_origin(origins=["http://localhost:5173"], methods=["DELETE", "OPTIONS"])
+@cross_origin(origins=["http://localhost:5173", "https://hostelitos.vercel.app"], methods=["DELETE", "OPTIONS"])
 def delete_room(room_id):
     try:
         client = MongoClient(os.getenv("MONGO_URI"), serverSelectionTimeoutMS=5000)
