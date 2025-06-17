@@ -24,7 +24,7 @@ export default function Login() {
 
   return (
     <div className="login-page" style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-      <div className="login-box" style={{ display: "flex", maxWidth: 800, width: "100%", borderRadius: 18, overflow: "hidden" }}>
+      <div className="login-box" style={{ display: "flex", width: "100%", borderRadius: 18, overflow: "hidden" }}>
         <div className="login-form-half" style={{ flex: 1, padding: 32, display: "flex", flexDirection: "column", justifyContent: "center", color: "#fff" }}>
           <p className="form-title" style={{ color: "#DF5323", textAlign: "center", fontSize: 28, marginBottom: 24 }}>
             Login
