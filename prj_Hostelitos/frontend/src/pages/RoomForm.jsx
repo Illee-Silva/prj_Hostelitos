@@ -23,7 +23,8 @@ export default function RoomForm() {
       formData.append("price", price);
       formData.append("image", image);
       formData.append("max_guests", maxGuests);
-      const res = await fetch("http://localhost:5000/api/rooms", {
+      const apiUrl = import.meta.env.VITE_API_URL;
+      const res = await fetch(`${apiUrl}/api/rooms`, {
         method: "POST",
         body: formData
       });

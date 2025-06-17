@@ -15,9 +15,11 @@ export default function ReservationsAdmin() {
   const [error, setError] = useState("");
   const [canceling, setCanceling] = useState("");
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     if (!user || !user.admin) return;
-    fetch("http://localhost:5000/api/reservations")
+    fetch(`${apiUrl}/api/reservations`)
       .then(res => res.json())
       .then(data => {
         if (data.success) setReservations(data.reservations);
@@ -34,7 +36,7 @@ export default function ReservationsAdmin() {
     if (!window.confirm("Deseja cancelar esta reserva?")) return;
     setCanceling(roomId);
     try {
-      const res = await fetch("http://localhost:5000/api/cancel-reservation", {
+      const res = await fetch(`${apiUrl}/api/cancel-reservation`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ room_id: roomId })

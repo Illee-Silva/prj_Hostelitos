@@ -8,9 +8,11 @@ export default function Reservations() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  const apiUrl = import.meta.env.VITE_API_URL;
+
   useEffect(() => {
     if (!user) return;
-    fetch("http://localhost:5000/api/reservations")
+    fetch(`${apiUrl}/api/reservations`)
       .then(res => res.json())
       .then(data => {
         if (data.success) {

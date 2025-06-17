@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export default function RoomRegister() {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -16,7 +18,7 @@ export default function RoomRegister() {
       setIsAdmin(false);
       return;
     }
-    fetch(`http://localhost:5000/api/users?email=${encodeURIComponent(email)}`)
+    fetch(`${apiUrl}/api/users?email=${encodeURIComponent(email)}`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.user && data.user.admin) {
@@ -34,7 +36,7 @@ export default function RoomRegister() {
 
   useEffect(() => {
     if (!isAdmin) return;
-    fetch("http://localhost:5000/api/rooms")
+    fetch(`${apiUrl}/api/rooms`)
       .then(res => res.json())
       .then(data => {
         if (data.success) setRooms(data.rooms);
@@ -47,7 +49,7 @@ export default function RoomRegister() {
     if (!window.confirm("Deseja apagar este quarto?")) return;
     setDeleting(roomId);
     try {
-      const res = await fetch(`http://localhost:5000/api/rooms/${roomId}`, {
+      const res = await fetch(`${apiUrl}/api/rooms/${roomId}`, {
         method: "DELETE"
       });
       const data = await res.json();

@@ -12,7 +12,8 @@ export async function register(email: string, password: string, name: string) {
   // Cria o usuário no Firebase
   const userCredential = await createUserWithEmailAndPassword(auth, email, password);
   // Salva no MongoDB
-  await fetch("http://localhost:5000/api/users", {
+  const apiUrl = import.meta.env.VITE_API_URL;
+  await fetch(`${apiUrl}/api/users`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email })
