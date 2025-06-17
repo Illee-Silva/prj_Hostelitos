@@ -20,10 +20,8 @@ export function useLoggedUser() {
     }
     updateUser();
     window.addEventListener("storage", updateUser);
-    window.addEventListener("focus", updateUser);
     return () => {
       window.removeEventListener("storage", updateUser);
-      window.removeEventListener("focus", updateUser);
     };
   }, []);
 
